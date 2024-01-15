@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:backround = "@drawable/gradient_list"
+    android:id="@+id/mainLayout">
+
 
     <FrameLayout
         android:id="@+id/framePersonalArea"
@@ -17,6 +20,12 @@
 
         android:background="#679267">
 
+        <ImageView
+            android:src="@drawable/PersonalIcon"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
+
+        </ImageView>
 
         <LinearLayout
             android:layout_width="match_parent"
