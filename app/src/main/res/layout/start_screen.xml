@@ -6,7 +6,6 @@
     android:gravity="center"
     android:orientation="vertical">
 
-
     <ImageView
         android:layout_height="match_parent"
         android:layout_width="match_parent"
@@ -18,7 +17,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/backround_1">
+        android:src="@drawable/backround">
     </ImageView>
 
     <FrameLayout
@@ -62,7 +61,8 @@
                 android:layout_height="wrap_content"
                 android:text="Создать профиль"
                 android:backgroundTint="#EFCD25"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp">
 
