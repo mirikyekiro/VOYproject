@@ -3,12 +3,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentTwo">
+    tools:context=".FragmentTwo"
+    android:background="@color/black">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/backToStartActivity"
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+            android:text="@string/Arrow_up"
+            android:textSize="32sp"
+            android:textColor="@color/black"
+            android:backgroundTint="#FFEFCD25"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp">
+
+        </Button>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/String_enterTheData"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp">
+        </TextView>
+
+        <EditText
+            android:id="@+id/editName"
+            android:layout_width="250dp"
+            android:layout_height="48sp"
+            android:text="@string/String_name"
+            android:textColor="#888888"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:inputType="text">
+        </EditText>
+
+        <FrameLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <EditText
+                android:layout_width="80dp"
+                android:layout_height="48sp"
+                android:text="@string/String_age"
+                android:textColor="#888888"
+                android:textSize="14sp"
+                android:layout_gravity="start"
+                android:inputType="number">
+            </EditText>
+
+            <EditText
+                android:layout_width="80dp"
+                android:layout_height="48sp"
+                android:text="@string/String_height"
+                android:textColor="#888888"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:inputType="number">
+            </EditText>
+
+            <EditText
+                android:layout_width="80dp"
+                android:layout_height="48sp"
+                android:text="@string/String_weigth"
+                android:textColor="#888888"
+                android:textSize="14sp"
+                android:layout_gravity="end"
+                android:inputType="number">
+            </EditText>
+
+        </FrameLayout>
+
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="@string/String_save"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:backgroundTint="#FFEFCD25"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp">
+
+        </Button>
+
+    </LinearLayout>
 
 </FrameLayout>

@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
+    android:id="@+id/main_activity"
     app:startDestination="@id/fragmentOne">
     <fragment
         android:id="@+id/fragmentOne"
@@ -12,14 +12,20 @@
         <action
             android:id="@+id/action_fragmentOne_to_fragmentTwo"
             app:destination="@id/fragmentTwo"
-            app:enterAnim="@anim/slide_in_bottom"
-            app:exitAnim="@anim/slide_in_top"
-            app:popEnterAnim="@anim/slide_out_bottom"
-            app:popExitAnim="@anim/slide_out_top" />
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_bottom" />
     </fragment>
     <fragment
         android:id="@+id/fragmentTwo"
         android:name="com.example.voyproject.FragmentTwo"
         android:label="fragment_two"
-        tools:layout="@layout/fragment_two" />
+        tools:layout="@layout/fragment_two" >
+        <action
+            android:id="@+id/action_fragmentTwo_to_fragmentOne"
+            app:destination="@id/fragmentOne"
+            app:enterAnim="@anim/slide_out_bottom"
+            app:exitAnim="@anim/slide_in_bottom" />
+    </fragment>
 </navigation>

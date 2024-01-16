@@ -2,4 +2,14 @@
     <string name="app_name">VOYproject</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="String_save">Сохранить</string>
+    <string name="String_weigth">Вес</string>
+    <string name="String_height">Рост</string>
+    <string name="String_name">Имя</string>
+    <string name="String_enterTheData">Введите данные</string>
+    <string name="Arrow_up">↑</string>
+    <string name="String_age">Возраст</string>
+    <string name="String_FoodDiary">FoodDiary</string>
+    <string name="String_largeText">Добро пожаловать! Это приложение поможет вам для ведения дневника и подсчета калорий на каждый день.</string>
+    <string name="String_createProfile">Создать профиль</string>
 </resources>

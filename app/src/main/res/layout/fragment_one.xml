@@ -6,9 +6,63 @@
     tools:context=".FragmentOne">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+
+    <ImageView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/food">
+    </ImageView>
+
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:src="@drawable/backround">
+    </ImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:layout_marginBottom="50sp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/String_FoodDiary"
+        android:textSize="32sp"
+        android:textColor="#FFEFCD25"
+        android:textStyle="bold"
+        android:layout_gravity="center">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="@string/String_largeText"
+        android:layout_marginTop="20dp">
+
+    </TextView>
+
+    <Button
+        android:id="@+id/btnCreateProfile"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="@string/String_createProfile"
+        android:backgroundTint="#EFCD25"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp">
+
+    </Button>
+    </LinearLayout>
 
 </FrameLayout>
