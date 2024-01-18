@@ -14,8 +14,8 @@
             app:destination="@id/fragmentTwo"
             app:enterAnim="@anim/slide_in_top"
             app:exitAnim="@anim/slide_out_top"
-            app:popEnterAnim="@anim/slide_in_bottom"
-            app:popExitAnim="@anim/slide_out_bottom" />
+            app:popEnterAnim="@anim/slide_out_bottom"
+            app:popExitAnim="@anim/slide_in_bottom" />
     </fragment>
     <fragment
         android:id="@+id/fragmentTwo"

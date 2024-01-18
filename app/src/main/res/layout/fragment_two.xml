@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".FragmentTwo"
     android:background="@color/black">
 
@@ -37,64 +38,96 @@
             android:layout_marginTop="100dp">
         </TextView>
 
-        <EditText
-            android:id="@+id/editName"
-            android:layout_width="250dp"
-            android:layout_height="48sp"
-            android:text="@string/String_name"
-            android:textColor="#888888"
-            android:textSize="14sp"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:inputType="text">
-        </EditText>
-
-        <FrameLayout
-            android:layout_width="250dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameError"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            app:errorEnabled="true"
+            android:layout_marginTop="25dp">
 
             <EditText
-                android:layout_width="80dp"
+                android:id="@+id/editName"
+                android:layout_width="300dp"
                 android:layout_height="48sp"
-                android:text="@string/String_age"
-                android:textColor="#888888"
+                android:hint="@string/String_name"
+                android:textColorHint="#888888"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+
+
+                android:inputType="text">
+            </EditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ageError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:errorEnabled="true">
+            <EditText
+                android:id="@+id/age"
+                android:layout_width="300dp"
+                android:layout_height="48sp"
+                android:hint="@string/String_age"
+                android:textColorHint="#888888"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:layout_gravity="start"
                 android:inputType="number">
             </EditText>
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/heightError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            android:layout_gravity="center">
             <EditText
-                android:layout_width="80dp"
+                android:id="@+id/height"
+                android:layout_width="300dp"
                 android:layout_height="48sp"
-                android:text="@string/String_height"
-                android:textColor="#888888"
+                android:hint="@string/String_height"
+                android:textColorHint="#888888"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:layout_gravity="center"
-                android:inputType="number">
+                android:inputType="numberDecimal">
             </EditText>
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/weightError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:errorEnabled="true">
             <EditText
-                android:layout_width="80dp"
+                android:id="@+id/weight"
+                android:layout_width="300dp"
                 android:layout_height="48sp"
-                android:text="@string/String_weigth"
-                android:textColor="#888888"
+                android:hint="@string/String_weigth"
+                android:textColorHint="#888888"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:layout_gravity="end"
-                android:inputType="number">
+                android:inputType="numberDecimal">
             </EditText>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        </FrameLayout>
 
         <Button
+            android:id="@+id/btnSaveProfile"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:text="@string/String_save"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:backgroundTint="#FFEFCD25"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp">
+            android:layout_gravity="center">
 
         </Button>
 
