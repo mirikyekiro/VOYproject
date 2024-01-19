@@ -25,11 +25,11 @@
         </activity>
 
         <activity
-            android:name=".StartScreen">
+            android:name=".StartScreen.StartScreen">
 
         </activity>
 
-        <activity android:name=".MainMenu">
+        <activity android:name=".MainMenu.MainMenu">
 
         </activity>
 

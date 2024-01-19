@@ -1,12 +1,14 @@
 package com.example.voyproject;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.voyproject.MainMenu.MainMenu;
+import com.example.voyproject.StartScreen.StartScreen;
 
 public class SplashActivity extends AppCompatActivity {
 

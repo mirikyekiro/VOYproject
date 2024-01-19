@@ -6,9 +6,9 @@
     app:startDestination="@id/fragmentOne">
     <fragment
         android:id="@+id/fragmentOne"
-        android:name="com.example.voyproject.FragmentOne"
+        android:name="com.example.voyproject.StartScreen.FragmentOne"
         android:label="fragment_one"
-        tools:layout="@layout/fragment_one" >
+        tools:layout="@layout/frag1_cp" >
         <action
             android:id="@+id/action_fragmentOne_to_fragmentTwo"
             app:destination="@id/fragmentTwo"
@@ -19,9 +19,9 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentTwo"
-        android:name="com.example.voyproject.FragmentTwo"
+        android:name="com.example.voyproject.StartScreen.FragmentTwo"
         android:label="fragment_two"
-        tools:layout="@layout/fragment_two" >
+        tools:layout="@layout/frag2_cp" >
         <action
             android:id="@+id/action_fragmentTwo_to_fragmentOne"
             app:destination="@id/fragmentOne"

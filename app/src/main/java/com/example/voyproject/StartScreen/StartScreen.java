@@ -1,8 +1,10 @@
-package com.example.voyproject;
+package com.example.voyproject.StartScreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.os.Bundle;
+
+import com.example.voyproject.R;
 
 public class StartScreen extends AppCompatActivity {
 

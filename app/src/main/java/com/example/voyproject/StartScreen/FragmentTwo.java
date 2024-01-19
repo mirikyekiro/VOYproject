@@ -1,30 +1,26 @@
-package com.example.voyproject;
+package com.example.voyproject.StartScreen;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.voyproject.MainMenu.MainMenu;
+import com.example.voyproject.R;
 import com.google.android.material.textfield.TextInputLayout;
-
-import java.time.Duration;
 
 public class FragmentTwo extends Fragment {
     public static final String APP_PREFERENCES = "myProfile";
@@ -42,7 +38,7 @@ public class FragmentTwo extends Fragment {
                              Bundle savedInstanceState) {
         Activity activity = getActivity();
 
-        View view = inflater.inflate(R.layout.fragment_two, container, false);
+        View view = inflater.inflate(R.layout.frag2_cp, container, false);
 
         btn = view.findViewById(R.id.backToStartActivity);
         btn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_fragmentTwo_to_fragmentOne, null));

@@ -1,8 +1,10 @@
-package com.example.voyproject;
+package com.example.voyproject.MainMenu;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.voyproject.R;
 
 public class MainMenu extends AppCompatActivity {
 
