@@ -1,6 +1,8 @@
 package com.example.voyproject;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
@@ -17,19 +19,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.time.Duration;
+
 public class FragmentTwo extends Fragment {
+    public static final String APP_PREFERENCES = "myProfile";
+    public static final String APP_PREFERENCES_NAME = "Name";
+    public static final String APP_PREFERENCES_AGE = "Age";
+    public static final String APP_PREFERENCES_HEIGHT = "Height";
+    public static final String APP_PREFERENCES_WEIGHT = "Weight";
     Button btn, btnSave;
     EditText editTextName, editTextAge, editTextHeight, editTextWeight;
     SharedPreferences sPref;
     TextInputLayout nameLayout, ageLayout, heightLayout, weightLayout;
-    final String SAVED_TEXT = "saved_text";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Activity activity = getActivity();
 
         View view = inflater.inflate(R.layout.fragment_two, container, false);
 
@@ -50,115 +61,6 @@ public class FragmentTwo extends Fragment {
         heightLayout = view.findViewById(R.id.heightError);
         weightLayout = view.findViewById(R.id.weightError);
 
-        editTextName.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if(TextUtils.isEmpty(editTextName.getText().toString())) {
-                    nameLayout.setError("Поле не должно быть пустым.");
-                } else nameLayout.setError(null);
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(TextUtils.isEmpty(editTextName.getText().toString())) {
-                    nameLayout.setError("Поле не должно быть пустым.");
-                } else nameLayout.setError(null);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(TextUtils.isEmpty(editTextName.getText().toString())) {
-                    nameLayout.setError("Поле не должно быть пустым.");
-                } else nameLayout.setError(null);
-            }
-        });
-
-        editTextAge.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if(TextUtils.isEmpty(editTextAge.getText().toString())) {
-                    ageLayout.setError("Поле не должно быть пустым");
-                } else if (Integer.parseInt(editTextAge.getText().toString()) < 10 && Integer.parseInt(editTextAge.getText().toString()) >100) {
-                    ageLayout.setError("Возраст должен быть от 10 лет");
-                } else ageLayout.setError(null);
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(TextUtils.isEmpty(editTextAge.getText().toString())) {
-                    ageLayout.setError("Поле не должно быть пустым");
-                } else if (Integer.parseInt(editTextAge.getText().toString()) < 10 && Integer.parseInt(editTextAge.getText().toString()) >100) {
-                    ageLayout.setError("Возраст должен быть от 10 лет");
-                } else ageLayout.setError(null);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(TextUtils.isEmpty(editTextAge.getText().toString())) {
-                    ageLayout.setError("Поле не должно быть пустым");
-                } else if (Integer.parseInt(editTextAge.getText().toString()) < 10 && Integer.parseInt(editTextAge.getText().toString()) >100) {
-                    ageLayout.setError("Возраст должен быть от 10 лет");
-                } else ageLayout.setError(null);
-            }
-        });
-
-        editTextHeight.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if(TextUtils.isEmpty(editTextHeight.getText().toString())) {
-                    heightLayout.setError("Поле не должно быть пустым.");
-                } else if (Integer.parseInt(editTextHeight.getText().toString()) < 50 && Integer.parseInt(editTextHeight.getText().toString()) >300) {
-                    heightLayout.setError("Рост должен быть хотя бы 50см");
-                } else heightLayout.setError(null);
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(TextUtils.isEmpty(editTextHeight.getText().toString())) {
-                    heightLayout.setError("Поле не должно быть пустым.");
-                } else if (Integer.parseInt(editTextHeight.getText().toString()) < 50 && Integer.parseInt(editTextHeight.getText().toString()) >300) {
-                    heightLayout.setError("Рост должен быть хотя бы 50см");
-                } else heightLayout.setError(null);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(TextUtils.isEmpty(editTextHeight.getText().toString())) {
-                    heightLayout.setError("Поле не должно быть пустым.");
-                } else if (Integer.parseInt(editTextHeight.getText().toString()) < 50 && Integer.parseInt(editTextHeight.getText().toString()) >300) {
-                    heightLayout.setError("Рост должен быть хотя бы 50см");
-                } else heightLayout.setError(null);
-            }
-        });
-
-        editTextWeight.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if(TextUtils.isEmpty(editTextWeight.getText().toString())) {
-                    weightLayout.setError("Поле не должно быть пустым.");
-                } else if (Float.parseFloat(editTextWeight.getText().toString()) < 35 && Float.parseFloat(editTextWeight.getText().toString()) > 650) {
-                    weightLayout.setError("Вес должен быть хотя бы 35.0кг");
-                } else weightLayout.setError(null);
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(TextUtils.isEmpty(editTextWeight.getText().toString())) {
-                    weightLayout.setError("Поле не должно быть пустым.");
-                } else if (Float.parseFloat(editTextWeight.getText().toString()) < 35 && Float.parseFloat(editTextWeight.getText().toString()) > 650) {
-                    weightLayout.setError("Вес должен быть хотя бы 35.0кг");
-                } else weightLayout.setError(null);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(TextUtils.isEmpty(editTextWeight.getText().toString())) {
-                    weightLayout.setError("Поле не должно быть пустым.");
-                } else if (Float.parseFloat(editTextWeight.getText().toString()) < 35 && Float.parseFloat(editTextWeight.getText().toString()) > 650) {
-                    weightLayout.setError("Вес должен быть хотя бы 35.0кг");
-                } else weightLayout.setError(null);
-            }
-        });
 
         CustomTextWatcher textWatcher = new CustomTextWatcher(edList, btnSave);
         for (EditText editText : edList) editText.addTextChangedListener(textWatcher);
@@ -166,22 +68,51 @@ public class FragmentTwo extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SaveData();
+                String strAge = editTextAge.getText().toString();
+                int intAge = Integer.parseInt(strAge);
+
+                String strHeight = editTextHeight.getText().toString();
+                float intHeight = Float.parseFloat(strHeight);
+
+                String strWeight = editTextWeight.getText().toString();
+                float intWeight = Float.parseFloat(strWeight);
+
+
+                if(intAge < 0 | intAge > 123)
+                    ageLayout.setError("Введите соответствующий возраст");
+                else if (intHeight < 30 | intHeight > 250) {
+                    ageLayout.setError(null);
+                    heightLayout.setError("Введите соответствующий рост");
+                }
+                else if (intWeight < 2 | intWeight > 800) {
+                    heightLayout.setError(null);
+                    weightLayout.setError("Введите соответствующий вес");
+                }
+                else {
+                    weightLayout.setError(null);
+                    Toast.makeText(activity, "Сохранение завершено!",Toast.LENGTH_LONG).show();
+                    SaveData();
+                    startActivity(new Intent(activity, MainMenu.class));
+                }
             }
         });
         return view;
     }
 
+
     private void SaveData(){
-        sPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        Activity activity = getActivity();
+
+        sPref = activity.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
-        ed.putString("Name", editTextName.getText().toString());
-        ed.putString("Age", editTextAge.getText().toString());
-        ed.putString("Height", editTextHeight.getText().toString());
-        ed.putString("Weight", editTextWeight.getText().toString());
+        ed.putString(APP_PREFERENCES_NAME, editTextName.getText().toString());
+        ed.putString(APP_PREFERENCES_AGE, editTextAge.getText().toString());
+        ed.putString(APP_PREFERENCES_HEIGHT, editTextHeight.getText().toString());
+        ed.putString(APP_PREFERENCES_WEIGHT, editTextWeight.getText().toString());
         ed.commit();
     }
 }
+
 
 class CustomTextWatcher implements TextWatcher {
 
@@ -195,7 +126,6 @@ class CustomTextWatcher implements TextWatcher {
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
     }
 
     @Override
