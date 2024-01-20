@@ -22,6 +22,9 @@ public class SplashActivity extends AppCompatActivity {
 
         sPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
+        ed.clear();
+        ed.commit();
+
         if(sPref.contains(APP_PREFERENCES_NAME)) {
             Intent intent = new Intent(this, MainMenu.class);
             startActivity(intent);

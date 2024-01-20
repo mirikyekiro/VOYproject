@@ -2,8 +2,9 @@ package com.example.voyproject.StartScreen;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,11 +15,11 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.voyproject.MainMenu.MainMenu;
 import com.example.voyproject.R;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -28,7 +29,7 @@ public class FragmentTwo extends Fragment {
     public static final String APP_PREFERENCES_AGE = "Age";
     public static final String APP_PREFERENCES_HEIGHT = "Height";
     public static final String APP_PREFERENCES_WEIGHT = "Weight";
-    Button btn, btnSave;
+    Button btnSave;
     EditText editTextName, editTextAge, editTextHeight, editTextWeight;
     SharedPreferences sPref;
     TextInputLayout nameLayout, ageLayout, heightLayout, weightLayout;
@@ -39,9 +40,6 @@ public class FragmentTwo extends Fragment {
         Activity activity = getActivity();
 
         View view = inflater.inflate(R.layout.frag2_cp, container, false);
-
-        btn = view.findViewById(R.id.backToStartActivity);
-        btn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_fragmentTwo_to_fragmentOne, null));
 
         editTextName = view.findViewById(R.id.editName);
         editTextAge = view.findViewById(R.id.age);
@@ -57,6 +55,7 @@ public class FragmentTwo extends Fragment {
         heightLayout = view.findViewById(R.id.heightError);
         weightLayout = view.findViewById(R.id.weightError);
 
+        btnSave.setEnabled(false);
 
         CustomTextWatcher textWatcher = new CustomTextWatcher(edList, btnSave);
         for (EditText editText : edList) editText.addTextChangedListener(textWatcher);
@@ -86,9 +85,10 @@ public class FragmentTwo extends Fragment {
                 }
                 else {
                     weightLayout.setError(null);
+                    closeKeyboard();
                     Toast.makeText(activity, "Сохранение завершено!",Toast.LENGTH_LONG).show();
                     SaveData();
-                    startActivity(new Intent(activity, MainMenu.class));
+                    Navigation.findNavController(view).navigate(R.id.action_fragmentTwo_to_fragmentThree);
                 }
             }
         });
@@ -106,6 +106,14 @@ public class FragmentTwo extends Fragment {
         ed.putString(APP_PREFERENCES_HEIGHT, editTextHeight.getText().toString());
         ed.putString(APP_PREFERENCES_WEIGHT, editTextWeight.getText().toString());
         ed.commit();
+    }
+
+    private void closeKeyboard(){
+        View view = this.getActivity().getCurrentFocus();
+        if(view !=null) {
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }
 
@@ -134,9 +142,11 @@ class CustomTextWatcher implements TextWatcher {
         for (EditText editText : edList) {
             if (editText.getText().toString().trim().length() <= 0) {
                 v.setEnabled(false);
+                v.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF9C8F4E")));
                 break;
             } else {
                 v.setEnabled(true);
+                v.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFEFCD25")));
             }
         }
     }
