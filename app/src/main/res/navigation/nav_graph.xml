@@ -34,5 +34,18 @@
         android:id="@+id/fragmentThree"
         android:name="com.example.voyproject.StartScreen.FragmentThree"
         android:label="FragmentThree"
-        tools:layout="@layout/frag3_cp"/>
+        tools:layout="@layout/frag3_cp">
+        <action
+            android:id="@+id/action_fragmentThree_to_fragmentFour"
+            app:destination="@id/fragmentFour"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_out_bottom"
+            app:popExitAnim="@anim/slide_in_bottom" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentFour"
+        android:name="com.example.voyproject.StartScreen.FragmentFour"
+        android:label="frag4_cp"
+        tools:layout="@layout/frag4_cp" />
 </navigation>

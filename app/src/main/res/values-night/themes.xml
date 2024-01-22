@@ -7,6 +7,7 @@
 
     <style name="Theme.VOYproject.MySplash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">#000000</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_inset</item>
         <item name="postSplashScreenTheme">@style/Theme.VOYproject</item>
     </style>
 </resources>

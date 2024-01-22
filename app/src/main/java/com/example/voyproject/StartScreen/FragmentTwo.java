@@ -102,9 +102,9 @@ public class FragmentTwo extends Fragment {
         sPref = activity.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
         ed.putString(APP_PREFERENCES_NAME, editTextName.getText().toString());
-        ed.putString(APP_PREFERENCES_AGE, editTextAge.getText().toString());
-        ed.putString(APP_PREFERENCES_HEIGHT, editTextHeight.getText().toString());
-        ed.putString(APP_PREFERENCES_WEIGHT, editTextWeight.getText().toString());
+        ed.putInt(APP_PREFERENCES_AGE, Integer.parseInt(editTextAge.getText().toString()));
+        ed.putInt(APP_PREFERENCES_HEIGHT, Integer.parseInt(editTextHeight.getText().toString()));
+        ed.putInt(APP_PREFERENCES_WEIGHT, Integer.parseInt(editTextWeight.getText().toString()));
         ed.commit();
     }
 
