@@ -1,14 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainMenu.FragmentProfile">
+    tools:context=".MainMenu.FragmentProfile"
+    android:layout_gravity="center"
+    android:verticalScrollbarPosition="right"
+    android:orientation="vertical"
+    android:background="#FFF9FCFF">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Профиль"
+            android:textStyle="bold"
+            android:textSize="32sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginTop="50sp"
+            android:layout_marginBottom="20sp">
+
+        </TextView>
+
+        <View
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_marginLeft="225sp"
+            android:layout_marginTop="50sp"
+            android:background="@drawable/more_vert">
+
+        </View>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:layout_margin="10sp"
+        android:id="@+id/name"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:layout_gravity="center">
+
+    </TextView>
+
+    <View
+        android:layout_width="150sp"
+        android:layout_height="150sp"
+        android:background="@drawable/logo_profile"
+        android:layout_gravity="center">
+
+    </View>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Возраст"
+            android:layout_margin="20sp"
+            android:id="@+id/age"
+            android:textSize="18sp"
+            android:layout_gravity="center">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Рост"
+            android:layout_margin="20sp"
+            android:id="@+id/height"
+            android:textSize="18sp"
+            android:layout_gravity="center">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Вес"
+            android:layout_margin="20sp"
+            android:id="@+id/weight"
+            android:textSize="18sp"
+            android:layout_gravity="center">
+
+        </TextView>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/deleteProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Удалить профиль"
+        android:backgroundTint="#9F0000"
+        android:textSize="16sp"
+        android:layout_gravity="center"/>
+
+
+
+
+
+</LinearLayout>
