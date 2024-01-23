@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainMenu.FragmentHome"
     android:layout_gravity="center"
     android:verticalScrollbarPosition="right"
@@ -54,8 +55,23 @@
         android:elevation="4dp"
         android:background="@drawable/rectangle">
 
+
     </View>
 
-
+    <com.yangp.ypwaveview.YPWaveView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:animatorEnable="false"
+        app:textHidden="false"
+        app:shapeType="circle"
+        app:frontColor="#1f3bed"
+        app:behideColor="#4e99e6"
+        app:borderColor="#ff0000"
+        app:borderWidthSize="4dp"
+        app:textColor="#15DF89"
+        app:max="1000"
+        app:progress="765"
+        app:strong="100"
+        app:shapePadding="30dp"/>
 
 </LinearLayout>
