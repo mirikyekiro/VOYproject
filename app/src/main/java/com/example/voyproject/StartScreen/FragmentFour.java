@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.voyproject.MainMenu.MainMenu;
 import com.example.voyproject.R;
@@ -49,7 +50,7 @@ public class FragmentFour extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (id == 2131231243)
+                if (id == 2131230994)
                 {
                     if(TextUtils.isEmpty(editWeight.getText().toString()))
                         errorWeight.setError("Введите значение!");
@@ -58,7 +59,7 @@ public class FragmentFour extends Fragment {
                     else {
                         ed.putInt(APP_PREFERENCES_DESWEIGHT, Integer.parseInt(editWeight.getText().toString()));
                         ed.commit();
-                        startActivity(new Intent(activity, MainMenu.class));
+                        Navigation.findNavController(view).navigate(R.id.action_fragmentFour_to_fragmentFive);
                     }
                 }
                 else {
@@ -69,7 +70,7 @@ public class FragmentFour extends Fragment {
                     else {
                         ed.putInt(APP_PREFERENCES_DESWEIGHT, Integer.parseInt(editWeight.getText().toString()));
                         ed.commit();
-                        startActivity(new Intent(activity, MainMenu.class));
+                        Navigation.findNavController(view).navigate(R.id.action_fragmentFour_to_fragmentFive);
                     }
                 }
 

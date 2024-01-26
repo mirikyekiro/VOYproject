@@ -14,7 +14,7 @@ public class SplashActivity extends AppCompatActivity {
 
     SharedPreferences sPref;
     public static final String APP_PREFERENCES = "myProfile";
-    public static final String APP_PREFERENCES_TYPE = "Type";
+    public static final String APP_PREFERENCES_TYPE_WORKOUT = "TypeWorkout";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
         sPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
 
-        if(sPref.contains(APP_PREFERENCES_TYPE)) {
+        if(sPref.contains(APP_PREFERENCES_TYPE_WORKOUT)) {
             Intent intent = new Intent(this, MainMenu.class);
             startActivity(intent);
             finish();

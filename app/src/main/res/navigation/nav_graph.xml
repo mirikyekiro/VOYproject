@@ -42,10 +42,30 @@
             app:exitAnim="@anim/slide_out_top"
             app:popEnterAnim="@anim/slide_out_bottom"
             app:popExitAnim="@anim/slide_in_bottom" />
+        <action
+            android:id="@+id/action_fragmentThree_to_fragmentFive"
+            app:destination="@id/fragmentFive"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_out_bottom"
+            app:popExitAnim="@anim/slide_in_bottom" />
     </fragment>
     <fragment
         android:id="@+id/fragmentFour"
         android:name="com.example.voyproject.StartScreen.FragmentFour"
         android:label="frag4_cp"
-        tools:layout="@layout/frag4_cp" />
+        tools:layout="@layout/frag4_cp" >
+        <action
+            android:id="@+id/action_fragmentFour_to_fragmentFive"
+            app:destination="@id/fragmentFive"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_out_bottom"
+            app:popExitAnim="@anim/slide_in_bottom" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentFive"
+        android:name="com.example.voyproject.StartScreen.FragmentFive"
+        android:label="frag5_cp"
+        tools:layout="@layout/frag5_cp" />
 </navigation>

@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainMenu.FragmentProfile"
-    android:layout_gravity="center"
-    android:verticalScrollbarPosition="right"
-    android:orientation="vertical"
-    android:background="#FFF9FCFF">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_editor_absoluteX="1dp"
+    app:layout_editor_absoluteY="1dp"
+    android:fillViewport="true"
+    tools:context=".MainMenu.FragmentProfile">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:verticalScrollbarPosition="right"
+        android:orientation="vertical"
+        android:background="#FFF9FCFF">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -23,7 +31,7 @@
             android:textStyle="bold"
             android:textSize="32sp"
             android:layout_marginLeft="10sp"
-            android:layout_marginTop="50sp"
+            android:layout_marginTop="10sp"
             android:layout_marginBottom="20sp">
 
         </TextView>
@@ -32,7 +40,7 @@
             android:layout_width="30sp"
             android:layout_height="30sp"
             android:layout_marginLeft="225sp"
-            android:layout_marginTop="50sp"
+            android:layout_marginTop="10sp"
             android:background="@drawable/more_vert">
 
         </View>
@@ -101,6 +109,34 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/typeProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Тип:"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:layout_margin="15sp"/>
+
+    <TextView
+        android:id="@+id/lifestyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Образ жизни:"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:layout_margin="15sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Желаемый вес:"
+        android:layout_margin="20sp"
+        android:id="@+id/weightDesired"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        android:visibility="invisible"/>
+
     <Button
         android:id="@+id/deleteProfile"
         android:layout_width="wrap_content"
@@ -112,6 +148,6 @@
 
 
 
+    </LinearLayout>
 
-
-</LinearLayout>
+</ScrollView>

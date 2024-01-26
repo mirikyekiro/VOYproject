@@ -1,40 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainMenu.FragmentHome"
-    android:layout_gravity="center"
-    android:verticalScrollbarPosition="right"
-    android:orientation="vertical"
-    android:background="#FFF9FCFF">
+    app:layout_editor_absoluteX="1dp"
+    app:layout_editor_absoluteY="1dp"
+    android:fillViewport="true"
+    tools:context=".MainMenu.FragmentHome">
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="fill"
+        android:verticalScrollbarPosition="right"
+        android:orientation="vertical"
+        android:background="#FFF9FCFF"
+        android:scrollbarAlwaysDrawVerticalTrack="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="10sp"
             android:text="Неделя"
-            android:textSize="16sp"
-            android:layout_marginLeft="10sp"
-            android:layout_marginTop="50sp">
+            android:textSize="16sp">
 
         </TextView>
 
         <View
             android:layout_width="30sp"
             android:layout_height="30sp"
-            android:background="@drawable/icon_calendar"
-            android:layout_marginLeft="300sp"
-            android:layout_marginTop="50sp">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="10sp"
+            android:background="@drawable/icon_calendar">
 
         </View>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -42,36 +53,353 @@
         android:text="Дата"
         android:textStyle="bold"
         android:textSize="32sp"
-        android:layout_marginLeft="10sp"
-        android:layout_marginTop="20sp"
-        android:layout_marginBottom="20sp">
+        android:layout_margin="10sp">
 
     </TextView>
 
-    <View
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="150sp"
-        android:layout_margin="10sp"
+        android:layout_height="120sp"
+        android:background="@drawable/rectangle"
         android:elevation="4dp"
-        android:background="@drawable/rectangle">
+        android:layout_margin="10sp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tipa kalorii"
+            android:textSize="21sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layerType="hardware"/>
 
-    </View>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.yangp.ypwaveview.YPWaveView
+    <!--breakfast-->
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:animatorEnable="false"
-        app:textHidden="false"
-        app:shapeType="circle"
-        app:frontColor="#1f3bed"
-        app:behideColor="#4e99e6"
-        app:borderColor="#ff0000"
-        app:borderWidthSize="4dp"
-        app:textColor="#15DF89"
-        app:max="1000"
-        app:progress="765"
-        app:strong="100"
-        app:shapePadding="30dp"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:background="@drawable/rectangle"
+        android:elevation="4dp"
+        android:orientation="vertical"
+        android:layout_gravity="fill">
 
-</LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constBreakfast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/progressBreakfastCal"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:indeterminateOnly="false"
+                android:progressDrawable="@drawable/circle_progress_bar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:max="120"
+                tools:progress="60" />
+
+            <TextView
+                android:id="@+id/breakfastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
+                android:layout_marginTop="10sp"
+                android:layerType="hardware"
+                android:text="Завтрак"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@id/progressBreakfastCal"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/progressBreakfastCalText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
+                android:layerType="hardware"
+                android:text="0/120 ккал"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/progressBreakfastCal"
+                app:layout_constraintTop_toBottomOf="@id/breakfastName" />
+
+            <Button
+                android:id="@+id/btnBreakast"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:layout_margin="10sp"
+                android:background="@drawable/add_circle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Пусто"
+                android:textSize="14sp"
+                android:layout_margin="10sp"
+                android:textColor="#9E9E9E"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <!--lunch-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:background="@drawable/rectangle"
+        android:elevation="4dp"
+        android:orientation="vertical"
+        android:layout_gravity="fill">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/consLunch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/progressLunchCal"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:indeterminateOnly="false"
+                android:progressDrawable="@drawable/circle_progress_bar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:max="120"
+                tools:progress="60" />
+
+            <TextView
+                android:id="@+id/lunchName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
+                android:layout_marginTop="10sp"
+                android:layerType="hardware"
+                android:text="Обед"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@id/progressLunchCal"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/progressLunchCalText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
+                android:layerType="hardware"
+                android:text="0/120 ккал"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/progressLunchCal"
+                app:layout_constraintTop_toBottomOf="@id/lunchName" />
+
+            <Button
+                android:id="@+id/btnLunch"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:layout_margin="10sp"
+                android:background="@drawable/add_circle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Пусто"
+                android:textSize="14sp"
+                android:layout_margin="10sp"
+                android:textColor="#9E9E9E"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <!--dinner-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:background="@drawable/rectangle"
+        android:elevation="4dp"
+        android:orientation="vertical"
+        android:layout_gravity="fill">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constDinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/progressDinnerCal"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:indeterminateOnly="false"
+                android:progressDrawable="@drawable/circle_progress_bar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:max="120"
+                tools:progress="60" />
+
+            <TextView
+                android:id="@+id/dinnerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
+                android:layout_marginTop="10sp"
+                android:layerType="hardware"
+                android:text="Ужин"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@id/progressDinnerCal"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/progressDinnerCalText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
+                android:layerType="hardware"
+                android:text="0/120 ккал"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/progressDinnerCal"
+                app:layout_constraintTop_toBottomOf="@id/dinnerName" />
+
+            <Button
+                android:id="@+id/btnDinner"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:layout_margin="10sp"
+                android:background="@drawable/add_circle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Пусто"
+                android:textSize="14sp"
+                android:layout_margin="10sp"
+                android:textColor="#9E9E9E"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <!--snack-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:background="@drawable/rectangle"
+        android:elevation="4dp"
+        android:orientation="vertical"
+        android:layout_gravity="fill">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constSnack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/progressSnackCal"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:indeterminateOnly="false"
+                android:progressDrawable="@drawable/circle_progress_bar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:max="120"
+                tools:progress="60" />
+
+            <TextView
+                android:id="@+id/snackName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
+                android:layout_marginTop="10sp"
+                android:layerType="hardware"
+                android:text="Перекус"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@id/progressSnackCal"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/progressSnackCalText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
+                android:layerType="hardware"
+                android:text="0/120 ккал"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/progressSnackCal"
+                app:layout_constraintTop_toBottomOf="@id/snackName" />
+
+            <Button
+                android:id="@+id/btnSnack"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:layout_margin="10sp"
+                android:background="@drawable/add_circle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Пусто"
+                android:textSize="14sp"
+                android:layout_margin="10sp"
+                android:textColor="#9E9E9E"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

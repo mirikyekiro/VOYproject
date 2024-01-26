@@ -50,6 +50,8 @@ public class MainMenu extends AppCompatActivity {
                 tabLayout.getTabAt(position).select();
             }
         });
+
+
     }
 
 
