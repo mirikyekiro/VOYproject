@@ -28,8 +28,9 @@ public class FragmentProfile extends Fragment {
     public static final String APP_PREFERENCES_TYPE_name = "TypeName";
     public static final String APP_PREFERENCES_TYPE_WORKOUT_name = "TypeWorkoutName";
     public static final String APP_PREFERENCES_DESWEIGHT = "DesiredWeight";
+    public static final String APP_PREFERENCES_SEX_name = "SexName";
 
-    TextView name, age, height, weight, type, lifestyle, desiredWeight;
+    TextView name, age, height, weight, type, lifestyle, desiredWeight, sex;
     Button deleteProfile;
 
     SharedPreferences sPref;
@@ -52,6 +53,7 @@ public class FragmentProfile extends Fragment {
         type = view.findViewById(R.id.typeProfile);
         lifestyle = view.findViewById(R.id.lifestyle);
         desiredWeight = view.findViewById(R.id.weightDesired);
+        sex = view.findViewById(R.id.sex);
 
         deleteProfile = view.findViewById(R.id.deleteProfile);
 
@@ -62,6 +64,7 @@ public class FragmentProfile extends Fragment {
         weight.setText("Вес: " + sPref.getInt(APP_PREFERENCES_WEIGHT, 0));
         type.setText("Тип: " + sPref.getString(APP_PREFERENCES_TYPE_name, ""));
         lifestyle.setText("Образ жизни: " + sPref.getString(APP_PREFERENCES_TYPE_WORKOUT_name, ""));
+        sex.setText("Пол: " + sPref.getString(APP_PREFERENCES_SEX_name, ""));
 
         if(sPref.contains(APP_PREFERENCES_DESWEIGHT)){
             desiredWeight.setVisibility(View.VISIBLE);

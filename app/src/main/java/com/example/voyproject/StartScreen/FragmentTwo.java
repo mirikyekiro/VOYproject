@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.voyproject.R;
@@ -29,10 +31,16 @@ public class FragmentTwo extends Fragment {
     public static final String APP_PREFERENCES_AGE = "Age";
     public static final String APP_PREFERENCES_HEIGHT = "Height";
     public static final String APP_PREFERENCES_WEIGHT = "Weight";
+    public static final String APP_PREFERENCES_SEX = "SexID";
+    public static final String APP_PREFERENCES_SEX_name = "SexName";
     Button btnSave;
+    View radioButton;
     EditText editTextName, editTextAge, editTextHeight, editTextWeight;
     SharedPreferences sPref;
     TextInputLayout nameLayout, ageLayout, heightLayout, weightLayout;
+    RadioGroup rg;
+    int radioButtonID, position;
+    RadioButton checkedRadioButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,6 +67,8 @@ public class FragmentTwo extends Fragment {
 
         CustomTextWatcher textWatcher = new CustomTextWatcher(edList, btnSave);
         for (EditText editText : edList) editText.addTextChangedListener(textWatcher);
+
+        rg = view.findViewById(R.id.sexRG);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +111,15 @@ public class FragmentTwo extends Fragment {
 
         sPref = activity.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
+
+        radioButtonID = rg.getCheckedRadioButtonId();
+        radioButton = rg.findViewById(radioButtonID);
+        position = rg.indexOfChild(radioButton);
+        checkedRadioButton =  rg.findViewById(radioButtonID);
+
+        ed.putInt(APP_PREFERENCES_SEX, position);
+        ed.putString(APP_PREFERENCES_SEX_name, checkedRadioButton.getText().toString());
+
         ed.putString(APP_PREFERENCES_NAME, editTextName.getText().toString());
         ed.putInt(APP_PREFERENCES_AGE, Integer.parseInt(editTextAge.getText().toString()));
         ed.putInt(APP_PREFERENCES_HEIGHT, Integer.parseInt(editTextHeight.getText().toString()));

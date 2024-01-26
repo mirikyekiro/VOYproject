@@ -105,8 +105,37 @@
             </EditText>
 
                 <RadioGroup
+                    android:id="@+id/sexRG"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20sp">
+
+                    <RadioButton
+                        android:id="@+id/woman"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="Жен"
+                        android:padding="16dp"
+                        android:button="@color/white"
+                        android:background="@drawable/radio_selector"
+                        android:elevation="4dp"
+                        android:layout_gravity="center"
+                        android:checked="true"
+                        android:layout_margin="15sp"/>
+
+                    <RadioButton
+                        android:id="@+id/man"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="Муж"
+                        android:padding="16dp"
+                        android:button="@color/white"
+                        android:background="@drawable/radio_selector"
+                        android:elevation="4dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="15sp"/>
 
                 </RadioGroup>
 

@@ -107,6 +107,17 @@
 
         </TextView>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Пол"
+            android:layout_margin="20sp"
+            android:id="@+id/sex"
+            android:textSize="18sp"
+            android:layout_gravity="center">
+
+        </TextView>
+
     </LinearLayout>
 
     <TextView
