@@ -122,8 +122,8 @@ public class FragmentTwo extends Fragment {
 
         ed.putString(APP_PREFERENCES_NAME, editTextName.getText().toString());
         ed.putInt(APP_PREFERENCES_AGE, Integer.parseInt(editTextAge.getText().toString()));
-        ed.putInt(APP_PREFERENCES_HEIGHT, Integer.parseInt(editTextHeight.getText().toString()));
-        ed.putInt(APP_PREFERENCES_WEIGHT, Integer.parseInt(editTextWeight.getText().toString()));
+        ed.putFloat(APP_PREFERENCES_HEIGHT, Float.parseFloat(editTextHeight.getText().toString()));
+        ed.putFloat(APP_PREFERENCES_WEIGHT, Float.parseFloat(editTextWeight.getText().toString()));
         ed.commit();
     }
 

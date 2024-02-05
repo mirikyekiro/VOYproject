@@ -60,15 +60,15 @@ public class FragmentProfile extends Fragment {
 
         name.setText(sPref.getString(APP_PREFERENCES_NAME, ""));
         age.setText("Возраст: " + sPref.getInt(APP_PREFERENCES_AGE, 0));
-        height.setText("Рост: " + sPref.getInt(APP_PREFERENCES_HEIGHT, 0));
-        weight.setText("Вес: " + sPref.getInt(APP_PREFERENCES_WEIGHT, 0));
+        height.setText("Рост: " + sPref.getFloat(APP_PREFERENCES_HEIGHT, 0.0f));
+        weight.setText("Вес: " + sPref.getFloat(APP_PREFERENCES_WEIGHT, 0.0f));
         type.setText("Тип: " + sPref.getString(APP_PREFERENCES_TYPE_name, ""));
         lifestyle.setText("Образ жизни: " + sPref.getString(APP_PREFERENCES_TYPE_WORKOUT_name, ""));
         sex.setText("Пол: " + sPref.getString(APP_PREFERENCES_SEX_name, ""));
 
         if(sPref.contains(APP_PREFERENCES_DESWEIGHT)){
             desiredWeight.setVisibility(View.VISIBLE);
-            desiredWeight.setText("Желаемый вес: " + sPref.getInt(APP_PREFERENCES_DESWEIGHT, 0));
+            desiredWeight.setText("Желаемый вес: " + sPref.getFloat(APP_PREFERENCES_DESWEIGHT, 0.0f));
         }
         else desiredWeight.setVisibility(View.INVISIBLE);
 

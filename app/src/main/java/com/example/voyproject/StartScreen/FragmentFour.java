@@ -43,7 +43,7 @@ public class FragmentFour extends Fragment {
         btnStart = view.findViewById(R.id.btnSave);
 
         int id = sPref.getInt(APP_PREFERENCES_TYPE, 0);
-        int weight = sPref.getInt(APP_PREFERENCES_WEIGHT, 0);
+        float weight = sPref.getFloat(APP_PREFERENCES_WEIGHT, 0);
 
 
         btnStart.setOnClickListener(new View.OnClickListener() {
@@ -54,10 +54,10 @@ public class FragmentFour extends Fragment {
                 {
                     if(TextUtils.isEmpty(editWeight.getText().toString()))
                         errorWeight.setError("Введите значение!");
-                    else if (Integer.parseInt(editWeight.getText().toString()) > weight)
-                        errorWeight.setError("Введите значение меньше вашему указанному весу!");
+                    else if (Float.parseFloat(editWeight.getText().toString()) < weight)
+                        errorWeight.setError("Введите значение больше вашему указанному весу!");
                     else {
-                        ed.putInt(APP_PREFERENCES_DESWEIGHT, Integer.parseInt(editWeight.getText().toString()));
+                        ed.putFloat(APP_PREFERENCES_DESWEIGHT, Float.parseFloat(editWeight.getText().toString()));
                         ed.commit();
                         Navigation.findNavController(view).navigate(R.id.action_fragmentFour_to_fragmentFive);
                     }
@@ -65,10 +65,10 @@ public class FragmentFour extends Fragment {
                 else {
                     if(TextUtils.isEmpty(editWeight.getText().toString()))
                         errorWeight.setError("Введите значение!");
-                    else if (Integer.parseInt(editWeight.getText().toString()) < weight)
-                        errorWeight.setError("Введите значение больше вашему указанному весу!");
+                    else if (Float.parseFloat(editWeight.getText().toString()) > weight)
+                        errorWeight.setError("Введите значение меньше вашему указанному весу!");
                     else {
-                        ed.putInt(APP_PREFERENCES_DESWEIGHT, Integer.parseInt(editWeight.getText().toString()));
+                        ed.putFloat(APP_PREFERENCES_DESWEIGHT, Float.parseFloat(editWeight.getText().toString()));
                         ed.commit();
                         Navigation.findNavController(view).navigate(R.id.action_fragmentFour_to_fragmentFive);
                     }

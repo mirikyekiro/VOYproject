@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_editor_absoluteX="1dp"
     app:layout_editor_absoluteY="1dp"
@@ -56,7 +56,8 @@
         android:id="@+id/name"
         android:textStyle="bold"
         android:textSize="24sp"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:textAlignment="center">
 
     </TextView>
 
@@ -75,46 +76,58 @@
         android:layout_gravity="center">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Возраст"
-            android:layout_margin="20sp"
             android:id="@+id/age"
-            android:textSize="18sp"
-            android:layout_gravity="center">
+            android:layout_width="75sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="20sp"
+            android:singleLine="false"
+            android:text="Возраст"
+            android:textAlignment="center"
+            android:textSize="18sp">
 
         </TextView>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Рост"
-            android:layout_margin="20sp"
             android:id="@+id/height"
-            android:textSize="18sp"
-            android:layout_gravity="center">
+            android:layout_width="75sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="20sp"
+            android:singleLine="false"
+            android:text="Рост"
+            android:textAlignment="center"
+            android:textSize="18sp">
 
         </TextView>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Вес"
-            android:layout_margin="20sp"
             android:id="@+id/weight"
-            android:textSize="18sp"
-            android:layout_gravity="center">
+            android:layout_width="55sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="20sp"
+            android:singleLine="false"
+            android:text="Вес"
+            android:textAlignment="center"
+            android:textSize="18sp">
 
         </TextView>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Пол"
-            android:layout_margin="20sp"
             android:id="@+id/sex"
-            android:textSize="18sp"
-            android:layout_gravity="center">
+            android:layout_width="75sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="20sp"
+            android:singleLine="false"
+            android:text="Пол"
+            android:textAlignment="center"
+            android:textSize="18sp">
 
         </TextView>
 
@@ -127,7 +140,8 @@
         android:text="Тип:"
         android:layout_gravity="center"
         android:textSize="18sp"
-        android:layout_margin="15sp"/>
+        android:layout_margin="15sp"
+        android:textAlignment="center"/>
 
     <TextView
         android:id="@+id/lifestyle"
@@ -136,7 +150,8 @@
         android:text="Образ жизни:"
         android:layout_gravity="center"
         android:textSize="18sp"
-        android:layout_margin="15sp"/>
+        android:layout_margin="15sp"
+        android:textAlignment="center"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -146,7 +161,8 @@
         android:id="@+id/weightDesired"
         android:textSize="18sp"
         android:layout_gravity="center"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        android:textAlignment="center"/>
 
     <Button
         android:id="@+id/deleteProfile"

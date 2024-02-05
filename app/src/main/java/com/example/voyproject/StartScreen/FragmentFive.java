@@ -25,8 +25,10 @@ public class FragmentFive extends Fragment {
     public static final String APP_PREFERENCES_TYPE_WORKOUT_name = "TypeWorkoutName";
     Button btnSave;
     SharedPreferences sPref;
+    View radioButton;
     RadioGroup rg;
-    RadioButton rb;
+    int radioButtonID, position;
+    RadioButton checkedRadioButton;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,12 +44,13 @@ public class FragmentFive extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int radioId = rg.getCheckedRadioButtonId();
-                RadioButton rb = (RadioButton) rg.findViewById(radioId);
-                String nameRB = (String) rb.getText();
+                radioButtonID = rg.getCheckedRadioButtonId();
+                radioButton = rg.findViewById(radioButtonID);
+                position = rg.indexOfChild(radioButton);
+                checkedRadioButton =  rg.findViewById(radioButtonID);
 
-                ed.putInt(APP_PREFERENCES_TYPE_WORKOUT, Integer.valueOf(radioId));
-                ed.putString(APP_PREFERENCES_TYPE_WORKOUT_name, nameRB);
+                ed.putInt(APP_PREFERENCES_TYPE_WORKOUT, position);
+                ed.putString(APP_PREFERENCES_TYPE_WORKOUT_name, checkedRadioButton.getText().toString());
                 ed.commit();
 
                 startActivity(new Intent(activity, MainMenu.class));

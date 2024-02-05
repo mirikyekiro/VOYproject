@@ -21,12 +21,14 @@ import com.example.voyproject.R;
 public class FragmentThree extends Fragment {
 
     public static final String APP_PREFERENCES = "myProfile";
-    public static final String APP_PREFERENCES_TYPE = "Type";
+    public static final String APP_PREFERENCES_TYPE = "TypeID";
     public static final String APP_PREFERENCES_TYPE_name = "TypeName";
     Button btnSave;
     SharedPreferences sPref;
+    View radioButton;
     RadioGroup rg;
-    RadioButton rb;
+    int radioButtonID, position;
+    RadioButton checkedRadioButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,16 +45,17 @@ public class FragmentThree extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int radioId = rg.getCheckedRadioButtonId();
-                RadioButton rb = (RadioButton) rg.findViewById(radioId);
-                String nameRB = (String) rb.getText();
+                radioButtonID = rg.getCheckedRadioButtonId();
+                radioButton = rg.findViewById(radioButtonID);
+                position = rg.indexOfChild(radioButton);
+                checkedRadioButton =  rg.findViewById(radioButtonID);
 
-                ed.putInt(APP_PREFERENCES_TYPE, Integer.valueOf(radioId));
-                ed.putString(APP_PREFERENCES_TYPE_name, nameRB);
+                ed.putInt(APP_PREFERENCES_TYPE, position);
+                ed.putString(APP_PREFERENCES_TYPE_name, checkedRadioButton.getText().toString());
                 ed.commit();
 
 
-                if(radioId == 2131231143)
+                if(position == 2)
                     Navigation.findNavController(view).navigate(R.id.action_fragmentThree_to_fragmentFive);
                 else
                     Navigation.findNavController(view).navigate(R.id.action_fragmentThree_to_fragmentFour);
@@ -62,8 +65,4 @@ public class FragmentThree extends Fragment {
         return view;
     }
 
-    public void checkButton(View view){
-        int radioId = rg.getCheckedRadioButtonId();
-        rb = view.findViewById(radioId);
-    }
 }

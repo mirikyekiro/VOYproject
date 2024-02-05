@@ -33,6 +33,21 @@
 
         </activity>
 
+        <activity
+            android:name=".AddFood.MainActivityFood">
+
+        </activity>
+
+        <activity
+            android:name=".AddFood.FoodDetailed">
+
+        </activity>
+
+        <activity
+            android:name=".AddFood.NewFood">
+
+        </activity>
+
 
     </application>
 

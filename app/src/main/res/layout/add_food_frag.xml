@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#FFF9FCFF"
+    tools:context=".AddFood.MainActivityFood">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:layout_marginBottom="10sp">
+
+        <Button
+            android:id="@+id/btnBackToMenu"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:background="@drawable/arrow_back"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/text_meal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="breakfast"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Button
+            android:id="@+id/btnAddNewProduct"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:background="@drawable/add_circle"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_food"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        app:queryHint="Поиск"
+        app:iconifiedByDefault="false"
+        android:focusable="true"
+        android:focusableInTouchMode="true"/>
+
+    <ListView
+        android:layout_marginStart="5sp"
+        android:layout_marginEnd="5sp"
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/list_item"
+        android:divider="#00FFFFFF"
+        android:dividerHeight="0.9sp">
+
+    </ListView>
+
+</LinearLayout>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Button
+        android:id="@+id/btnBackToMenu2"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:background="@drawable/arrow_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/String_enterTheData"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp">
+        </TextView>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameFoodError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:errorEnabled="true"
+            android:layout_marginTop="25dp">
+
+            <EditText
+                android:id="@+id/editNameFood"
+                android:layout_width="300dp"
+                android:layout_height="48sp"
+                android:hint="Название блюда"
+                android:textColorHint="#888888"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+
+
+                android:inputType="text">
+            </EditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/kcalError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:errorEnabled="true">
+        <EditText
+            android:id="@+id/kcalEdit"
+            android:layout_width="300dp"
+            android:layout_height="48sp"
+            android:hint="Ккал"
+            android:textColorHint="#888888"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_gravity="start"
+            android:inputType="number">
+        </EditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/proteinError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:errorEnabled="true">
+            <EditText
+                android:id="@+id/proteinEdit"
+                android:layout_width="300dp"
+                android:layout_height="48sp"
+                android:hint="Белки"
+                android:textColorHint="#888888"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_gravity="start"
+                android:inputType="number">
+            </EditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fatError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            android:layout_gravity="center">
+            <EditText
+                android:id="@+id/fatEdit"
+                android:layout_width="300dp"
+                android:layout_height="48sp"
+                android:hint="Жиры"
+                android:textColorHint="#888888"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:inputType="numberDecimal">
+            </EditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/carboError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:errorEnabled="true">
+            <EditText
+                android:id="@+id/carboEdit"
+                android:layout_width="300dp"
+                android:layout_height="48sp"
+                android:hint="Углеводы"
+                android:textColorHint="#888888"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_gravity="end"
+                android:inputType="numberDecimal">
+            </EditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/grammError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:errorEnabled="false">
+        <EditText
+            android:id="@+id/grammEdit"
+            android:layout_width="300dp"
+            android:layout_height="48sp"
+            android:hint="Граммы"
+            android:text="100"
+            android:textColorHint="#888888"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_gravity="end"
+            android:inputType="numberDecimal">
+        </EditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/btnSaveFood"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="@string/String_save"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginTop="10sp">
+
+        </Button>
+
+</LinearLayout>

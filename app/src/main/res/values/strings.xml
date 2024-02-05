@@ -12,4 +12,5 @@
     <string name="String_FoodDiary">FoodDiary</string>
     <string name="String_largeText">Добро пожаловать! Это приложение поможет вам для ведения дневника и подсчета калорий на каждый день.</string>
     <string name="String_createProfile">Создать профиль</string>
+
 </resources>

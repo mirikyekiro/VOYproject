@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".AddFood.FoodDetailed">
+
+    <Button
+        android:id="@+id/btnBackAddFodd"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:background="@drawable/arrow_back"
+        android:layout_margin="10sp"/>
+
+    <TextView
+        android:id="@+id/detailName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10sp"/>
+
+    <TextView
+        android:id="@+id/detailKcal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ccal"
+        android:textSize="28sp"
+        android:layout_margin="10sp"
+        android:layout_gravity="center_horizontal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10sp">
+
+        <TextView
+            android:id="@+id/detailProtein"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Protein"
+            android:textSize="21sp"
+            android:layout_marginRight="50sp"/>
+
+        <TextView
+            android:id="@+id/detailFat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Protein"
+            android:textSize="21sp"/>
+
+        <TextView
+            android:id="@+id/detailCarbo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Protein"
+            android:textSize="21sp"
+            android:layout_marginLeft="50sp"/>
+
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:hint="100гр"
+        android:layout_margin="15sp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Добавить"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
