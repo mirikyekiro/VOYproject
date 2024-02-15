@@ -206,6 +206,7 @@
     <!--breakfast-->
 
     <LinearLayout
+        android:id="@+id/llBreakfast"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10sp"
@@ -288,6 +289,7 @@
     <!--lunch-->
 
     <LinearLayout
+        android:id="@+id/llLunch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10sp"
@@ -370,6 +372,7 @@
     <!--dinner-->
 
     <LinearLayout
+        android:id="@+id/llDinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10sp"
@@ -452,6 +455,7 @@
     <!--snack-->
 
     <LinearLayout
+        android:id="@+id/llSnack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10sp"

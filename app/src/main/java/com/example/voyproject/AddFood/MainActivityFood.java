@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,14 +25,15 @@ public class MainActivityFood extends AppCompatActivity {
     RecyclerView recyclerView;
     DatabaseHelper databaseHelper;
     ArrayList<String> food_id, food_name, food_kcal, food_protein, food_fat, food_carbo, food_gramm;
+    String textMeal;
     ListAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_food);
-
-
+        Bundle arguments = getIntent().getExtras();
+        textMeal = arguments.get("textMeal").toString();
 
         Button btnBack = findViewById(R.id.btnBackToMenu);
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -61,9 +63,18 @@ public class MainActivityFood extends AppCompatActivity {
 
         storeDataInArrays();
 
-        listAdapter = new ListAdapter(MainActivityFood.this, food_id, food_name, food_kcal, food_gramm);
+        listAdapter = new ListAdapter(MainActivityFood.this, food_id, food_name, food_kcal, food_protein, food_fat, food_carbo, food_gramm);
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivityFood.this));
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            recreate();
+        }
     }
 
     void storeDataInArrays(){

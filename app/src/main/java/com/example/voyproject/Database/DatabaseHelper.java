@@ -21,8 +21,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String FOOD_CARBO = "carbo";
     private static final String FOOD_GRAMM = "gramm";
 
-    private static final String FOOD_DATE = "gramm";
-    private static final String FOOD_CATEGORY= "gramm";
+    private static final String FOOD_DATE = "date";
+    private static final String FOOD_CATEGORY= "category";
 
     private static final String DB_NAME = "main_database.db";
     private static final int DB_VERSION = 1;
@@ -67,9 +67,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(FOOD_GRAMM, gramm);
         long result = db.insert(TABLE_NAME_FOODLIST, null, cv);
         if(result == -1)
-            Toast.makeText(context, "Ошибка", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Failed to add", Toast.LENGTH_LONG).show();
         else
-            Toast.makeText(context, "Блюдо добавлено", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Successfully added.", Toast.LENGTH_LONG).show();
+    }
+
+    public void deleteOneRow(String id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(TABLE_NAME_FOODLIST, "_id=?", new String[]{id});
+        if(result == -1)
+            Toast.makeText(context, "Failed to delete", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(context, "Successfully deleted.", Toast.LENGTH_LONG).show();
     }
 
     public void moveFood(String name, String kcal, String protein, String fat, String carbo, String gramm, String category, String date)
@@ -87,13 +97,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(FOOD_DATE, date);
         long result = db.insert(TABLE_NAME_CATEGORYLIST, null, cv);
         if(result == -1)
-            Toast.makeText(context, "Ошибка", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Failed to add", Toast.LENGTH_LONG).show();
         else
-            Toast.makeText(context, "Блюдо добавлено", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Successfully added.", Toast.LENGTH_LONG).show();
     }
 
     public Cursor readAllData(){
         String query = "SELECT * FROM " + TABLE_NAME_FOODLIST;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null)
+        {
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
+    public Cursor readAllDataCATEGORYLIST(){
+        String query = "SELECT * FROM " + TABLE_NAME_CATEGORYLIST;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;

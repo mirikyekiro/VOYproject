@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Button;
@@ -36,6 +37,7 @@ public class FragmentHome extends Fragment {
     ProgressBar pbKcal, pbProtein, pbFats, pbCarbohydrates, firstArgTrans, secondArgTrans, thirdArgTrans, pbBreakfast, pbLunch, pbDinner, pbSnack;
     float kCal, proteins, fats, carbohydrates;
     Button btnBreakfast, btnLunch, btnDinner, btnSnack;
+    LinearLayout llBreakfast, llLunch, llDinner, llSnack;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,7 +99,12 @@ public class FragmentHome extends Fragment {
         btnDinner = view.findViewById(R.id.btnDinner);
         btnSnack = view.findViewById(R.id.btnSnack);
 
-        btnBreakfast.setOnClickListener(new View.OnClickListener() {
+        llBreakfast = view.findViewById(R.id.llBreakfast);
+        llLunch = view.findViewById(R.id.llLunch);
+        llDinner = view.findViewById(R.id.llDinner);
+        llSnack = view.findViewById(R.id.llSnack);
+
+        llBreakfast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TextView textMeal = view.findViewById(R.id.breakfastName);
@@ -105,7 +112,7 @@ public class FragmentHome extends Fragment {
                 PostmanInterface(str);
             }
         });
-        btnLunch.setOnClickListener(new View.OnClickListener() {
+        llLunch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TextView textMeal = view.findViewById(R.id.lunchName);
@@ -113,7 +120,7 @@ public class FragmentHome extends Fragment {
                 PostmanInterface(str);
             }
         });
-        btnDinner.setOnClickListener(new View.OnClickListener() {
+        llDinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TextView textMeal = view.findViewById(R.id.dinnerName);
@@ -121,7 +128,7 @@ public class FragmentHome extends Fragment {
                 PostmanInterface(str);
             }
         });
-        btnSnack.setOnClickListener(new View.OnClickListener() {
+        llSnack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TextView textMeal = view.findViewById(R.id.snackName);
@@ -130,6 +137,38 @@ public class FragmentHome extends Fragment {
             }
         });
 
+        btnBreakfast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textMeal = view.findViewById(R.id.breakfastName);
+                String str = textMeal.getText().toString();
+                PostmanInterface2(str);
+            }
+        });
+        btnLunch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textMeal = view.findViewById(R.id.lunchName);
+                String str = textMeal.getText().toString();
+                PostmanInterface2(str);
+            }
+        });
+        btnDinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textMeal = view.findViewById(R.id.dinnerName);
+                String str = textMeal.getText().toString();
+                PostmanInterface2(str);
+            }
+        });
+        btnSnack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textMeal = view.findViewById(R.id.snackName);
+                String str = textMeal.getText().toString();
+                PostmanInterface2(str);
+            }
+        });
 
         return view;
     }
@@ -212,6 +251,12 @@ public class FragmentHome extends Fragment {
 
     private void PostmanInterface(String str){
         Intent intent = new Intent(getActivity(), ListDay.class);
+        intent.putExtra("textMeal", str);
+        startActivity(intent);
+    }
+
+    private void PostmanInterface2(String str){
+        Intent intent = new Intent(getActivity(), MainActivityFood.class);
         intent.putExtra("textMeal", str);
         startActivity(intent);
     }

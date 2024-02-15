@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:orientation="vertical"
-
+    android:background="#FFF9FCFF"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Button
