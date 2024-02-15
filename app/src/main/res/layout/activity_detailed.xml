@@ -72,9 +72,18 @@
         android:layout_margin="15sp"/>
 
     <Button
+        android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Добавить"
         android:layout_gravity="center_horizontal"/>
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Удалить"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#BF0B0B"/>
 
 </LinearLayout>

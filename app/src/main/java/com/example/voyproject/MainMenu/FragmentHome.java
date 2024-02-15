@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Button;
 
+import com.example.voyproject.AddFood.ListDay;
 import com.example.voyproject.AddFood.MainActivityFood;
 import com.example.voyproject.R;
 
@@ -210,7 +211,7 @@ public class FragmentHome extends Fragment {
     }
 
     private void PostmanInterface(String str){
-        Intent intent = new Intent(getActivity(), MainActivityFood.class);
+        Intent intent = new Intent(getActivity(), ListDay.class);
         intent.putExtra("textMeal", str);
         startActivity(intent);
     }

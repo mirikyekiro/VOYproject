@@ -7,7 +7,8 @@
     android:layout_marginTop="10sp"
     android:layout_marginStart="10sp"
     android:layout_marginEnd="10sp"
-    android:descendantFocusability="blocksDescendants">
+    android:descendantFocusability="blocksDescendants"
+    android:id="@+id/mainLayout">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,7 +17,7 @@
 
         <TextView
             android:id="@+id/listName"
-            android:layout_width="wrap_content"
+            android:layout_width="250sp"
             android:layout_height="wrap_content"
             android:text="Name food"
             android:textStyle="bold"
@@ -27,9 +28,9 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
+            android:id="@+id/listGramm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="100гр"
             android:layout_marginTop="10sp"
             android:layout_marginStart="10sp"
             android:layout_marginBottom="10sp"
@@ -46,10 +47,10 @@
             android:layout_toEndOf="@id/listName"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/btn_addProduct"/>
+            app:layout_constraintRight_toLeftOf="@id/btnAddProduct"/>
 
         <Button
-            android:id="@+id/btn_addProduct"
+            android:id="@+id/btnAddProduct"
             android:layout_width="50sp"
             android:layout_height="50sp"
             android:layout_marginEnd="10sp"

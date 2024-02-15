@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.voyproject.Database.DatabaseHelper;
 import com.example.voyproject.MainMenu.MainMenu;
 import com.example.voyproject.StartScreen.StartScreen;
 
@@ -23,9 +24,9 @@ public class SplashActivity extends AppCompatActivity {
         sPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
 
+
         if(sPref.contains(APP_PREFERENCES_TYPE_WORKOUT)) {
-            Intent intent = new Intent(this, MainMenu.class);
-            startActivity(intent);
+            startActivity(new Intent(this, MainMenu.class));
             finish();
         }
         else {

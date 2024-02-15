@@ -37,12 +37,12 @@ public class NewFood extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatabaseHelper db = new DatabaseHelper(NewFood.this);
-                db.addFood(nameEdit.getText().toString(),
-                        Integer.valueOf(kcalEdit.getText().toString()),
-                        Integer.valueOf(proteinEdit.getText().toString()),
-                        Integer.valueOf(fatEdit.getText().toString()),
-                        Integer.valueOf(carboEdit.getText().toString()),
-                        Integer.valueOf(grammEdit.getText().toString()));
+                db.addFood(nameEdit.getText().toString().trim(),
+                        kcalEdit.getText().toString().trim(),
+                        proteinEdit.getText().toString().trim(),
+                        fatEdit.getText().toString().trim(),
+                        carboEdit.getText().toString().trim(),
+                        grammEdit.getText().toString().trim());
             }
         });
 
