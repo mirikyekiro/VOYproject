@@ -19,7 +19,12 @@ import android.widget.Button;
 
 import com.example.voyproject.AddFood.ListDay;
 import com.example.voyproject.AddFood.MainActivityFood;
+import com.example.voyproject.Database.DatabaseHelper;
 import com.example.voyproject.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class FragmentHome extends Fragment {
     int sexID, typeID, workoutID, age;
@@ -33,11 +38,13 @@ public class FragmentHome extends Fragment {
     public static final String APP_PREFERENCES_HEIGHT = "Height";
     public static final String APP_PREFERENCES_WEIGHT = "Weight";
 
-    TextView kcalText, proteinText, fatsText, carbohydratesText, bfKcalText, lunchKcalText, dinnerKcalText, snackKcalText;
+    TextView kcalText, proteinText, fatsText, carbohydratesText, bfKcalText, lunchKcalText, dinnerKcalText, snackKcalText, textDate;
     ProgressBar pbKcal, pbProtein, pbFats, pbCarbohydrates, firstArgTrans, secondArgTrans, thirdArgTrans, pbBreakfast, pbLunch, pbDinner, pbSnack;
     float kCal, proteins, fats, carbohydrates;
     Button btnBreakfast, btnLunch, btnDinner, btnSnack;
     LinearLayout llBreakfast, llLunch, llDinner, llSnack;
+    String sumBf, sumLunch, sumDinner, sumSnack, mainSum, sumProtein, sumFat, sumCarbo;
+    DatabaseHelper db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +52,15 @@ public class FragmentHome extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-
+        db = new DatabaseHelper(getActivity());
+        sumBf = db.getSum("kcal", "Breakfast");
+        sumLunch = db.getSum("kcal", "Lunch");
+        sumDinner = db.getSum("kcal", "Dinner");
+        sumSnack = db.getSum("kcal", "Snack");
+        mainSum = db.getSum("kcal", "");
+        sumProtein = db.getSum("protein", "");
+        sumFat = db.getSum("fat", "");
+        sumCarbo = db.getSum("carbo", "");
 
         Activity activity = getActivity();
 
@@ -58,6 +73,8 @@ public class FragmentHome extends Fragment {
         age = sPref.getInt(APP_PREFERENCES_AGE, 0);
         heightData = sPref.getFloat(APP_PREFERENCES_HEIGHT, 0f);
         weightData = sPref.getFloat(APP_PREFERENCES_WEIGHT, 0f);
+
+        textDate = view.findViewById(R.id.date);
 
         kcalText = view.findViewById(R.id.textKcal);
         proteinText = view.findViewById(R.id.textProtein);
@@ -170,6 +187,10 @@ public class FragmentHome extends Fragment {
             }
         });
 
+        String date = new SimpleDateFormat("d MMMM", Locale.getDefault()).format(new Date());
+
+        textDate.setText(date);
+
         return view;
     }
 
@@ -218,8 +239,9 @@ public class FragmentHome extends Fragment {
             default: kcal=0f; break;
         }
 
-        kcalText.setText(0+"/"+Math.round(kcal)+" Ккал");
+        kcalText.setText(mainSum+" / "+Math.round(kcal)+" Ккал");
         pbKcal.setMax(Math.round(kcal));
+        pbKcal.setProgress(Integer.parseInt(mainSum));
 
         proteins = kcal * 0.3f /4;
         fats = kcal * 0.3f /9;
@@ -228,25 +250,34 @@ public class FragmentHome extends Fragment {
         pbProtein.setMax(Math.round(proteins));
         pbFats.setMax(Math.round(fats));
         pbCarbohydrates.setMax(Math.round(carbohydrates));
-        proteinText.setText(0+"/"+Math.round(proteins)+" гр");
-        fatsText.setText(0+"/"+Math.round(fats)+" гр");
-        carbohydratesText.setText(0+"/"+Math.round(carbohydrates)+" гр");
+
+        pbProtein.setProgress(Integer.parseInt(sumProtein));
+        pbFats.setProgress(Integer.parseInt(sumFat));
+        pbCarbohydrates.setProgress(Integer.parseInt(sumCarbo));
+
+        proteinText.setText(sumProtein+" / "+Math.round(proteins)+" гр");
+        fatsText.setText(sumFat+" / "+Math.round(fats)+" гр");
+        carbohydratesText.setText(sumCarbo+" / "+Math.round(carbohydrates)+" гр");
 
         int bfKcal = Math.round(kcal*30/100);
         pbBreakfast.setMax(bfKcal);
-        bfKcalText.setText("/" + bfKcal + " ккал");
+        pbBreakfast.setProgress(Integer.parseInt(sumBf));
+        bfKcalText.setText(sumBf +" / " + bfKcal + " ккал");
 
         int lunchKcal = Math.round(kcal*30/100);
         pbLunch.setMax(lunchKcal);
-        lunchKcalText.setText("/" + lunchKcal + " ккал");
+        pbLunch.setProgress(Integer.parseInt(sumLunch));
+        lunchKcalText.setText(sumLunch + " / " + lunchKcal + " ккал");
 
         int dinnerKcal = Math.round(kcal*25/100);
         pbDinner.setMax(dinnerKcal);
-        dinnerKcalText.setText("/" + dinnerKcal + " ккал");
+        pbDinner.setProgress(Integer.parseInt(sumDinner));
+        dinnerKcalText.setText(sumDinner + " / " + dinnerKcal + " ккал");
 
         int snackKcal = Math.round(kcal*15/100);
         pbSnack.setMax(snackKcal);
-        snackKcalText.setText("/" + snackKcal + " ккал");
+        pbSnack.setProgress(Integer.parseInt(sumSnack));
+        snackKcalText.setText(sumSnack + " / " + snackKcal + " ккал");
     }
 
     private void PostmanInterface(String str){
@@ -259,5 +290,13 @@ public class FragmentHome extends Fragment {
         Intent intent = new Intent(getActivity(), MainActivityFood.class);
         intent.putExtra("textMeal", str);
         startActivity(intent);
+    }
+    
+    public void previousDayAction(){
+
+    }
+
+    public void nextDayAction(){
+
     }
 }

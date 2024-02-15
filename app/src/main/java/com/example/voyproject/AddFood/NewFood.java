@@ -13,6 +13,8 @@ import com.example.voyproject.R;
 
 public class NewFood extends AppCompatActivity {
     EditText nameEdit, kcalEdit, proteinEdit, fatEdit, carboEdit, grammEdit;
+    ListAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +46,7 @@ public class NewFood extends AppCompatActivity {
                         fatEdit.getText().toString().trim(),
                         carboEdit.getText().toString().trim(),
                         grammEdit.getText().toString().trim());
+                finish();
             }
         });
 

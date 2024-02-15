@@ -21,7 +21,7 @@ public class ListDay extends AppCompatActivity {
     RecyclerView recyclerView;
     DatabaseHelper databaseHelper;
     ArrayList<String> food_id, food_name, food_kcal, food_protein, food_fat, food_carbo, food_gramm, food_category, food_date;
-    ListAdapter listAdapter;
+    ProfileListAdapter listAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +43,9 @@ public class ListDay extends AppCompatActivity {
         btnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ListDay.this, MainActivityFood.class));
+                Intent intent = new Intent(ListDay.this, MainActivityFood.class);
+                intent.putExtra("textMeal", textMeal);
+                startActivity(intent);
             }
         });
 
@@ -59,15 +61,15 @@ public class ListDay extends AppCompatActivity {
         food_category = new ArrayList<>();
         food_date = new ArrayList<>();
 
-        storeDataInArrays();
+        storeDataInArrays(textMeal);
 
-        listAdapter = new ListAdapter(ListDay.this, food_id, food_name, food_kcal, food_protein, food_fat, food_carbo, food_gramm);
+        listAdapter = new ProfileListAdapter(ListDay.this, this, food_id, food_name, food_kcal, food_protein, food_fat, food_carbo, food_gramm, textMeal);
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(ListDay.this));
     }
 
-    void storeDataInArrays(){
-        Cursor cursor = databaseHelper.readAllDataCATEGORYLIST();
+    void storeDataInArrays(String textMeal){
+        Cursor cursor = databaseHelper.readAllDataCATEGORYLIST(textMeal);
         if(cursor.getCount() == 0){
             Toast.makeText(this, "No data.", Toast.LENGTH_LONG).show();
         }

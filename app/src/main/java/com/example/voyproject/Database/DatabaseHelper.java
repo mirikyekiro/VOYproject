@@ -82,6 +82,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Successfully deleted.", Toast.LENGTH_LONG).show();
     }
 
+    public void deleteOneRowInProfile(String id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(TABLE_NAME_CATEGORYLIST, "_id=?", new String[]{id});
+        if(result == -1)
+            Toast.makeText(context, "Failed to delete", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(context, "Successfully deleted.", Toast.LENGTH_LONG).show();
+    }
+
     public void moveFood(String name, String kcal, String protein, String fat, String carbo, String gramm, String category, String date)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -114,8 +124,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Cursor readAllDataCATEGORYLIST(){
-        String query = "SELECT * FROM " + TABLE_NAME_CATEGORYLIST;
+    public Cursor readAllDataCATEGORYLIST(String textMeal){
+        String query = "SELECT * FROM " + TABLE_NAME_CATEGORYLIST +
+                " WHERE " + FOOD_CATEGORY + " LIKE " + " '" + textMeal + "' ";
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -124,5 +135,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor = db.rawQuery(query, null);
         }
         return cursor;
+    }
+
+    public String getSum(String str, String category){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query;
+        if(category == "")
+            query = "SELECT SUM(" + str + ") FROM " + TABLE_NAME_CATEGORYLIST;
+        else
+            query = "SELECT SUM(" + str + ") FROM " + TABLE_NAME_CATEGORYLIST +
+                    " WHERE " + FOOD_CATEGORY + " LIKE " + " '" + category + "' ";
+        String sum;
+        Cursor cursor = db.rawQuery (query, null);
+        if(cursor.moveToFirst())
+            sum = String.valueOf(cursor.getInt(0));
+        else sum = "0";
+
+        db.close();
+        return sum;
     }
 }

@@ -21,6 +21,7 @@ public class FoodDetailed extends AppCompatActivity {
     String id, name, kcal, protein, fat, carbohydrat, gramm;
     TextView nameText, kcalText, proteinText, fatText, carbohydratText;
     EditText grammText;
+    ListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,7 @@ public class FoodDetailed extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 DatabaseHelper myDB = new DatabaseHelper(FoodDetailed.this);
                 myDB.deleteOneRow(id);
+                finish();
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {

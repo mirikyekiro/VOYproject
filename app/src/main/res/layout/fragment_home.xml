@@ -22,30 +22,41 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="50sp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="20sp">
 
-        <TextView
+        <Button
+            android:id="@+id/lastBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/left_arrow"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="10sp"
-            android:text="Неделя"
-            android:textSize="16sp">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-        </TextView>
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Дата"
+            android:textStyle="bold"
+            android:textSize="32sp"
+            android:layout_margin="10sp"
+            app:layout_constraintLeft_toRightOf="@id/lastBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/nextBtn"/>
+
+        <Button
+            android:id="@+id/nextBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/right_arrow"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Дата"
-        android:textStyle="bold"
-        android:textSize="32sp"
-        android:layout_margin="10sp">
-
-    </TextView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -240,7 +251,7 @@
                 android:layout_marginLeft="20sp"
                 android:layout_marginTop="10sp"
                 android:layerType="hardware"
-                android:text="Завтрак"
+                android:text="Breakfast"
                 android:textSize="21sp"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toRightOf="@id/progressBreakfastCal"
@@ -323,7 +334,7 @@
                 android:layout_marginLeft="20sp"
                 android:layout_marginTop="10sp"
                 android:layerType="hardware"
-                android:text="Обед"
+                android:text="Lunch"
                 android:textSize="21sp"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toRightOf="@id/progressLunchCal"
@@ -406,7 +417,7 @@
                 android:layout_marginLeft="20sp"
                 android:layout_marginTop="10sp"
                 android:layerType="hardware"
-                android:text="Ужин"
+                android:text="Dinner"
                 android:textSize="21sp"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toRightOf="@id/progressDinnerCal"
@@ -488,7 +499,7 @@
                 android:layout_marginLeft="20sp"
                 android:layout_marginTop="10sp"
                 android:layerType="hardware"
-                android:text="Перекус"
+                android:text="Snack"
                 android:textSize="21sp"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toRightOf="@id/progressSnackCal"

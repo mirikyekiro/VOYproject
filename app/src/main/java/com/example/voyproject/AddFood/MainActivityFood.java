@@ -63,7 +63,7 @@ public class MainActivityFood extends AppCompatActivity {
 
         storeDataInArrays();
 
-        listAdapter = new ListAdapter(MainActivityFood.this, food_id, food_name, food_kcal, food_protein, food_fat, food_carbo, food_gramm);
+        listAdapter = new ListAdapter(MainActivityFood.this, this, food_id, food_name, food_kcal, food_protein, food_fat, food_carbo, food_gramm, textMeal);
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivityFood.this));
 
