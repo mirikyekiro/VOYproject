@@ -46,7 +46,7 @@ public class NewFood extends AppCompatActivity {
                         fatEdit.getText().toString().trim(),
                         carboEdit.getText().toString().trim(),
                         grammEdit.getText().toString().trim());
-                finish();
+                startActivityForResult(new Intent(NewFood.this, MainActivityFood.class), 0);
             }
         });
 

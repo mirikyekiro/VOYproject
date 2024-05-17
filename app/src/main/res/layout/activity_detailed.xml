@@ -42,26 +42,26 @@
 
         <TextView
             android:id="@+id/detailProtein"
-            android:layout_width="wrap_content"
+            android:layout_width="80sp"
             android:layout_height="wrap_content"
-            android:text="Protein"
+            android:text="Белки"
             android:textSize="21sp"
-            android:layout_marginRight="50sp"/>
+            android:layout_marginRight="20sp"/>
 
         <TextView
             android:id="@+id/detailFat"
-            android:layout_width="wrap_content"
+            android:layout_width="80sp"
             android:layout_height="wrap_content"
-            android:text="Protein"
+            android:text="Жиры"
             android:textSize="21sp"/>
 
         <TextView
             android:id="@+id/detailCarbo"
-            android:layout_width="wrap_content"
+            android:layout_width="120sp"
             android:layout_height="wrap_content"
-            android:text="Protein"
+            android:text="Углеводы"
             android:textSize="21sp"
-            android:layout_marginLeft="50sp"/>
+            android:layout_marginLeft="20sp"/>
 
     </LinearLayout>
 
@@ -78,7 +78,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Добавить"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#EFCD25"
+        android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/btnDelete"

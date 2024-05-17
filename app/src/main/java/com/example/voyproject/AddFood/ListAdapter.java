@@ -78,6 +78,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder>{
                 intent.putExtra("fat", String.valueOf(food_fat.get(position)));
                 intent.putExtra("carbo", String.valueOf(food_carbo.get(position)));
                 intent.putExtra("gramm", String.valueOf(food_gramm.get(position)));
+                intent.putExtra("textMeal", textMeal);
                 activity.startActivityForResult(intent, 1);
             }
         });

@@ -1,11 +1,15 @@
 package com.example.voyproject.AddFood;
 
 
+import static java.lang.Integer.valueOf;
+
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,12 +20,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.voyproject.Database.DatabaseHelper;
 import com.example.voyproject.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class FoodDetailed extends AppCompatActivity {
 
-    String id, name, kcal, protein, fat, carbohydrat, gramm;
+    String id, name, kcal, protein, fat, carbohydrat, gramm, textMeal;
     TextView nameText, kcalText, proteinText, fatText, carbohydratText;
     EditText grammText;
     ListAdapter adapter;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +45,7 @@ public class FoodDetailed extends AppCompatActivity {
         fat = arguments.get("fat").toString();
         carbohydrat = arguments.get("carbo").toString();
         gramm = arguments.get("gramm").toString();
+        textMeal = arguments.get("textMeal").toString();
 
         nameText = this.findViewById(R.id.detailName);
         kcalText = this.findViewById(R.id.detailKcal);
@@ -46,14 +56,47 @@ public class FoodDetailed extends AppCompatActivity {
 
         nameText.setText(name);
         kcalText.setText(kcal + " кКал");
-        proteinText.setText(protein + " белков");
-        fatText.setText(fat + " жиров");
-        carbohydratText.setText(carbohydrat + " углеводов");
+        proteinText.setText("Белки:    "+protein );
+        fatText.setText("Жиры:    "+fat);
+        carbohydratText.setText("Углеводы: "+carbohydrat);
         grammText.setHint(gramm + " грамм");
 
         Button add = this.findViewById(R.id.btnAdd);
         Button delete = this.findViewById(R.id.btnDelete);
         Button back = this.findViewById(R.id.btnBackAddFodd);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            DatabaseHelper db = new DatabaseHelper(context);
+            @Override
+            public void onClick(View v) {
+                String date = new SimpleDateFormat("d MMMM", Locale.getDefault()).format(new Date());
+                if(grammText.getText().toString() == "")
+                {
+                    db.moveFood(
+                            name,
+                            kcal,
+                            protein,
+                            fat,
+                            carbohydrat,
+                            "100",
+                            textMeal,
+                            date);
+                }
+                else
+                {
+                    db.moveFood(
+                            name,
+                            kcal,
+                            protein,
+                            fat,
+                            carbohydrat,
+                            grammText.getText().toString(),
+                            textMeal,
+                            date);
+                }
+                finish();
+            }
+        });
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override

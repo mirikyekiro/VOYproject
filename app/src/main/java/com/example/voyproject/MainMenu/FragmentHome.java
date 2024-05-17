@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +20,11 @@ import android.widget.Button;
 
 import com.example.voyproject.AddFood.ListDay;
 import com.example.voyproject.AddFood.MainActivityFood;
+import com.example.voyproject.AddFood.NewFood;
 import com.example.voyproject.Database.DatabaseHelper;
 import com.example.voyproject.R;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,12 +42,12 @@ public class FragmentHome extends Fragment {
     public static final String APP_PREFERENCES_HEIGHT = "Height";
     public static final String APP_PREFERENCES_WEIGHT = "Weight";
 
-    TextView kcalText, proteinText, fatsText, carbohydratesText, bfKcalText, lunchKcalText, dinnerKcalText, snackKcalText, textDate;
+    TextView kcalText, proteinText, fatsText, carbohydratesText, bfKcalText, lunchKcalText, dinnerKcalText, snackKcalText, textDate, listTextBreakFast, listTextDinner, listTextLunch, listTextSnack;
     ProgressBar pbKcal, pbProtein, pbFats, pbCarbohydrates, firstArgTrans, secondArgTrans, thirdArgTrans, pbBreakfast, pbLunch, pbDinner, pbSnack;
     float kCal, proteins, fats, carbohydrates;
     Button btnBreakfast, btnLunch, btnDinner, btnSnack;
     LinearLayout llBreakfast, llLunch, llDinner, llSnack;
-    String sumBf, sumLunch, sumDinner, sumSnack, mainSum, sumProtein, sumFat, sumCarbo;
+    Float sumBf, sumLunch, sumDinner, sumSnack, mainSum, sumProtein, sumFat, sumCarbo;
     DatabaseHelper db;
 
     @Override
@@ -53,10 +57,12 @@ public class FragmentHome extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         db = new DatabaseHelper(getActivity());
-        sumBf = db.getSum("kcal", "Breakfast");
-        sumLunch = db.getSum("kcal", "Lunch");
-        sumDinner = db.getSum("kcal", "Dinner");
-        sumSnack = db.getSum("kcal", "Snack");
+        db.create_db();
+
+        sumBf = db.getSum("kcal", "Завтрак");
+        sumLunch = db.getSum("kcal", "Обед");
+        sumDinner = db.getSum("kcal", "Ужин");
+        sumSnack = db.getSum("kcal", "Перекус");
         mainSum = db.getSum("kcal", "");
         sumProtein = db.getSum("protein", "");
         sumFat = db.getSum("fat", "");
@@ -120,6 +126,11 @@ public class FragmentHome extends Fragment {
         llLunch = view.findViewById(R.id.llLunch);
         llDinner = view.findViewById(R.id.llDinner);
         llSnack = view.findViewById(R.id.llSnack);
+
+        listTextBreakFast = view.findViewById(R.id.listTextBreakFast);
+        listTextDinner = view.findViewById(R.id.listTextDinner);
+        listTextLunch = view.findViewById(R.id.listTextLunch);
+        listTextSnack = view.findViewById(R.id.listTextSnack);
 
         llBreakfast.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,7 +202,15 @@ public class FragmentHome extends Fragment {
 
         textDate.setText(date);
 
+        SetTextInCategoty("Breakfast", listTextBreakFast);
+
         return view;
+    }
+
+    private void SetTextInCategoty(String category, TextView list)
+    {
+        DatabaseHelper db = new DatabaseHelper(getActivity());
+        list.setText(db.getNameFood(category));
     }
 
     private void CalculationOfKcalDesired(int sex, int workout, int age, float height, float weight){
@@ -239,45 +258,51 @@ public class FragmentHome extends Fragment {
             default: kcal=0f; break;
         }
 
+
         kcalText.setText(mainSum+" / "+Math.round(kcal)+" Ккал");
         pbKcal.setMax(Math.round(kcal));
-        pbKcal.setProgress(Integer.parseInt(mainSum));
+        pbKcal.setProgress(Math.round(mainSum));
 
         proteins = kcal * 0.3f /4;
         fats = kcal * 0.3f /9;
         carbohydrates = kcal * 0.4f /4;
 
-        pbProtein.setMax(Math.round(proteins));
-        pbFats.setMax(Math.round(fats));
-        pbCarbohydrates.setMax(Math.round(carbohydrates));
-
-        pbProtein.setProgress(Integer.parseInt(sumProtein));
-        pbFats.setProgress(Integer.parseInt(sumFat));
-        pbCarbohydrates.setProgress(Integer.parseInt(sumCarbo));
-
-        proteinText.setText(sumProtein+" / "+Math.round(proteins)+" гр");
-        fatsText.setText(sumFat+" / "+Math.round(fats)+" гр");
-        carbohydratesText.setText(sumCarbo+" / "+Math.round(carbohydrates)+" гр");
+        setPBDetail(pbProtein, "protein", proteinText, Math.round(proteins));
+        setPBDetail(pbFats, "fat", fatsText, Math.round(fats));
+        setPBDetail(pbCarbohydrates, "carbo", carbohydratesText, Math.round(carbohydrates));
 
         int bfKcal = Math.round(kcal*30/100);
-        pbBreakfast.setMax(bfKcal);
-        pbBreakfast.setProgress(Integer.parseInt(sumBf));
         bfKcalText.setText(sumBf +" / " + bfKcal + " ккал");
+        pbBreakfast.setMax(bfKcal);
+        pbBreakfast.setProgress(Math.round(sumBf));
 
         int lunchKcal = Math.round(kcal*30/100);
-        pbLunch.setMax(lunchKcal);
-        pbLunch.setProgress(Integer.parseInt(sumLunch));
         lunchKcalText.setText(sumLunch + " / " + lunchKcal + " ккал");
+        pbLunch.setMax(lunchKcal);
+        pbLunch.setProgress(Math.round(sumLunch));
 
         int dinnerKcal = Math.round(kcal*25/100);
-        pbDinner.setMax(dinnerKcal);
-        pbDinner.setProgress(Integer.parseInt(sumDinner));
         dinnerKcalText.setText(sumDinner + " / " + dinnerKcal + " ккал");
+        pbDinner.setMax(dinnerKcal);
+        pbDinner.setProgress(Math.round(sumDinner));
 
         int snackKcal = Math.round(kcal*15/100);
-        pbSnack.setMax(snackKcal);
-        pbSnack.setProgress(Integer.parseInt(sumSnack));
         snackKcalText.setText(sumSnack + " / " + snackKcal + " ккал");
+        pbSnack.setMax(snackKcal);
+        pbSnack.setProgress(Math.round(sumSnack));
+    }
+
+    private void setPBDetail(ProgressBar pb, String detail, TextView text, int maxValue)
+    {
+        DatabaseHelper db = new DatabaseHelper(getActivity());
+        Float value = db.getSum(detail, "");
+        text.setText(value+" / "+maxValue+" гр");
+        pb.setMax(360);
+
+        if(Math.round(value)>maxValue)
+            pb.setProgress(115);
+        else
+            pb.setProgress(115*Math.round(value)/maxValue);
     }
 
     private void PostmanInterface(String str){

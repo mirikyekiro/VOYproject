@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.voyproject.Database.DatabaseHelper;
+import com.example.voyproject.MainMenu.FragmentHome;
+import com.example.voyproject.MainMenu.MainMenu;
 import com.example.voyproject.R;
 
 import java.util.ArrayList;
@@ -39,7 +41,7 @@ public class MainActivityFood extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                startActivityForResult(new Intent(MainActivityFood.this, MainMenu.class), 0);
             }
         });
 

@@ -1,13 +1,25 @@
 package com.example.voyproject.Database;
 
+import static java.lang.Integer.valueOf;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.ResultSet;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME_FOODLIST = "foodTable";
@@ -24,29 +36,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String FOOD_DATE = "date";
     private static final String FOOD_CATEGORY= "category";
 
+    private static String DB_PATH;
     private static final String DB_NAME = "main_database.db";
     private static final int DB_VERSION = 1;
     private Context context;
+
     public DatabaseHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-        this.context = context;
+        this.context=context;
+        DB_PATH = "/data/data/com.example.voyproject/databases/main_database.db";
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query1 = "CREATE TABLE IF NOT EXISTS " +
-                TABLE_NAME_FOODLIST + " (" + ID_FOOD + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                FOOD_NAME +  " TEXT, " + FOOD_KCAL + " INTEGER, " +
-                FOOD_PROTEIN + " INTEGER, " + FOOD_FAT + " INTEGER, " +
-                FOOD_CARBO + " INTEGER, " + FOOD_GRAMM + " INTEGER)";
-        String query2 = "CREATE TABLE IF NOT EXISTS " +
-                TABLE_NAME_CATEGORYLIST + " (" + ID_FOOD + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                FOOD_NAME +  " TEXT, " + FOOD_KCAL + " INTEGER, " +
-                FOOD_PROTEIN + " INTEGER, " + FOOD_FAT + " INTEGER, " +
-                FOOD_CARBO + " INTEGER, " + FOOD_GRAMM + " INTEGER, " +
-                FOOD_CATEGORY + " TEXT, " + FOOD_DATE + " DATE)";
-        db.execSQL(query1);
-        db.execSQL(query2);
+
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -137,21 +141,77 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public String getSum(String str, String category){
+    public Float getSum(String str, String category){
         SQLiteDatabase db = this.getReadableDatabase();
-        String query;
+        Cursor cursor;
         if(category == "")
-            query = "SELECT SUM(" + str + ") FROM " + TABLE_NAME_CATEGORYLIST;
+            cursor = db.query (TABLE_NAME_CATEGORYLIST, new String[] {"SUM("+str+")"}, null, null, null, null, null);
         else
-            query = "SELECT SUM(" + str + ") FROM " + TABLE_NAME_CATEGORYLIST +
-                    " WHERE " + FOOD_CATEGORY + " LIKE " + " '" + category + "' ";
-        String sum;
-        Cursor cursor = db.rawQuery (query, null);
+            cursor = db.query (TABLE_NAME_CATEGORYLIST, new String[] {"SUM("+str+"), category"}, "category = ?", new String[] {category}, null, null, null);
+
+        float sum;
         if(cursor.moveToFirst())
-            sum = String.valueOf(cursor.getInt(0));
-        else sum = "0";
+            sum = valueOf(cursor.getInt(0));
+        else sum = 0;
+
+        Log.d("SUKA", ""+valueOf(cursor.getInt(0)));
 
         db.close();
         return sum;
+    }
+
+    public String getNameFood(String category)
+    {
+        String text = "";
+        int countRow;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT name FROM " + TABLE_NAME_CATEGORYLIST +
+                    " WHERE " + FOOD_CATEGORY + " LIKE " + " '" + category + "' ";
+
+        Cursor cursor = db.rawQuery (query, null);
+
+        String querySum = "SELECT COUNT(name) FROM " + TABLE_NAME_CATEGORYLIST +
+                " WHERE " + FOOD_CATEGORY + " LIKE " + " '" + category + "' ";
+
+        Cursor cursor1 = db.rawQuery (querySum, null);
+        if(cursor1.moveToFirst())
+            countRow = valueOf(cursor1.getInt(0));
+        else countRow = 0;
+
+        if(cursor.moveToFirst())
+        {
+            for(int i = 0; i < countRow; i++)
+            {
+                text += String.valueOf(cursor.getInt(i));
+            }
+        }
+        else text = "Пусто";
+
+        db.close();
+        return text;
+    }
+
+    public void create_db(){
+        File file = new File(DB_PATH);
+        if (!file.exists()) {
+            try(InputStream myInput = context.getAssets().open(DB_NAME);
+                OutputStream myOutput = new FileOutputStream(DB_PATH)) {
+
+                byte[] buffer = new byte[1024];
+                int length;
+                while ((length = myInput.read(buffer)) > 0) {
+                    myOutput.write(buffer, 0, length);
+                }
+                myOutput.flush();
+            }
+            catch(IOException ex){
+                Log.d("DatabaseHelper", ex.getMessage());
+            }
+        }
+    }
+    public SQLiteDatabase open()throws SQLException {
+        return SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READWRITE);
     }
 }

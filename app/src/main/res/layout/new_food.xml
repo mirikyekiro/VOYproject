@@ -150,6 +150,8 @@
             android:id="@+id/btnSaveFood"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="#EFCD25"
+            android:textColor="@color/black"
             android:text="@string/String_save"
             android:textStyle="bold"
             android:layout_gravity="center"

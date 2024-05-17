@@ -30,6 +30,7 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
 
         DatabaseHelper mydb;
         ArrayList food_id, food_name, food_kcal, food_protein, food_fat, food_carbo, food_gramm;
+        ProfileListAdapter adapter = this;
         String textMeal;
         ProfileListAdapter(Activity activity,
                 Context context,
@@ -77,6 +78,8 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
                 @Override
                 public void onClick(View v) {
                     db.deleteOneRowInProfile(String.valueOf(food_id.get(position)));
+                    food_id.remove(food_id.get(position));
+                    adapter.notifyDataSetChanged();
                 }
             });
         }
