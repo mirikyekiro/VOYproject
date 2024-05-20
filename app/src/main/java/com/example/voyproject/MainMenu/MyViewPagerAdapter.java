@@ -18,7 +18,7 @@ public class MyViewPagerAdapter extends FragmentStateAdapter {
             case 0:
                 return new FragmentHome();
             case 1:
-                return new FragmentCalculate();
+                return new FragmentCalendar();
             case 2:
                 return new FragmentProfile();
             default:

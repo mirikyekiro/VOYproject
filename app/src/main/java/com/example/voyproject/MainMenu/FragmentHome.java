@@ -1,5 +1,7 @@
 package com.example.voyproject.MainMenu;
 
+import static com.example.voyproject.Calendar.CalendarUtils.selectedDate;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -7,7 +9,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,14 +21,13 @@ import android.widget.Button;
 
 import com.example.voyproject.AddFood.ListDay;
 import com.example.voyproject.AddFood.MainActivityFood;
-import com.example.voyproject.AddFood.NewFood;
+import com.example.voyproject.Calendar.CalendarUtils;
 import com.example.voyproject.Database.DatabaseHelper;
 import com.example.voyproject.R;
 
-import org.w3c.dom.Text;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.Locale;
 
 public class FragmentHome extends Fragment {
@@ -42,13 +42,14 @@ public class FragmentHome extends Fragment {
     public static final String APP_PREFERENCES_HEIGHT = "Height";
     public static final String APP_PREFERENCES_WEIGHT = "Weight";
 
-    TextView kcalText, proteinText, fatsText, carbohydratesText, bfKcalText, lunchKcalText, dinnerKcalText, snackKcalText, textDate, listTextBreakFast, listTextDinner, listTextLunch, listTextSnack;
+    TextView kcalText, proteinText, fatsText, carbohydratesText, bfKcalText, lunchKcalText, dinnerKcalText, snackKcalText, textDate, textMonth, listTextBreakFast, listTextDinner, listTextLunch, listTextSnack;
     ProgressBar pbKcal, pbProtein, pbFats, pbCarbohydrates, firstArgTrans, secondArgTrans, thirdArgTrans, pbBreakfast, pbLunch, pbDinner, pbSnack;
     float kCal, proteins, fats, carbohydrates;
-    Button btnBreakfast, btnLunch, btnDinner, btnSnack;
+    Button btnBreakfast, btnLunch, btnDinner, btnSnack, backDate, nextDate;
     LinearLayout llBreakfast, llLunch, llDinner, llSnack;
-    Float sumBf, sumLunch, sumDinner, sumSnack, mainSum, sumProtein, sumFat, sumCarbo;
+    Float sumBf, sumLunch, sumDinner, sumSnack, mainSum, sumProtein, sumFat, sumCarbo, sumKcal;
     DatabaseHelper db;
+    String date;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,14 +60,7 @@ public class FragmentHome extends Fragment {
         db = new DatabaseHelper(getActivity());
         db.create_db();
 
-        sumBf = db.getSum("kcal", "Завтрак");
-        sumLunch = db.getSum("kcal", "Обед");
-        sumDinner = db.getSum("kcal", "Ужин");
-        sumSnack = db.getSum("kcal", "Перекус");
-        mainSum = db.getSum("kcal", "");
-        sumProtein = db.getSum("protein", "");
-        sumFat = db.getSum("fat", "");
-        sumCarbo = db.getSum("carbo", "");
+        selectedDate = LocalDate.now();
 
         Activity activity = getActivity();
 
@@ -80,7 +74,7 @@ public class FragmentHome extends Fragment {
         heightData = sPref.getFloat(APP_PREFERENCES_HEIGHT, 0f);
         weightData = sPref.getFloat(APP_PREFERENCES_WEIGHT, 0f);
 
-        textDate = view.findViewById(R.id.date);
+        textMonth = view.findViewById(R.id.monthDay);
 
         kcalText = view.findViewById(R.id.textKcal);
         proteinText = view.findViewById(R.id.textProtein);
@@ -121,6 +115,8 @@ public class FragmentHome extends Fragment {
         btnLunch = view.findViewById(R.id.btnLunch);
         btnDinner = view.findViewById(R.id.btnDinner);
         btnSnack = view.findViewById(R.id.btnSnack);
+        backDate = view.findViewById(R.id.lastBtn);
+        nextDate = view.findViewById(R.id.nextBtn);
 
         llBreakfast = view.findViewById(R.id.llBreakfast);
         llLunch = view.findViewById(R.id.llLunch);
@@ -198,13 +194,59 @@ public class FragmentHome extends Fragment {
             }
         });
 
-        String date = new SimpleDateFormat("d MMMM", Locale.getDefault()).format(new Date());
+        backDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                previousDayAction();
+            }
+        });
 
-        textDate.setText(date);
+        nextDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nextDayAction();
+            }
+        });
 
-        SetTextInCategoty("Breakfast", listTextBreakFast);
-
+        //SetTextInCategoty("Breakfast", listTextBreakFast);
+        setDatView();
         return view;
+    }
+
+    public void loadData()
+    {
+        Log.d("dateFH", selectedDate + "");
+        sumBf = db.getSum("kcal", "Завтрак", selectedDate.toString());
+        sumLunch = db.getSum("kcal", "Обед", selectedDate.toString());
+        sumDinner = db.getSum("kcal", "Ужин", selectedDate.toString());
+        sumSnack = db.getSum("kcal", "Перекус", selectedDate.toString());
+        mainSum = db.getSum("kcal", "", selectedDate.toString());
+        sumProtein = db.getSum("protein", "", selectedDate.toString());
+        sumFat = db.getSum("fat", "", selectedDate.toString());
+        sumCarbo = db.getSum("carbo", "", selectedDate.toString());
+
+        proteins = sumKcal * 0.3f /4;
+        fats = sumKcal * 0.3f /9;
+        carbohydrates = sumKcal * 0.4f /4;
+
+        setPBDetail(pbProtein, "protein", proteinText, Math.round(proteins), selectedDate.toString());
+        setPBDetail(pbFats, "fat", fatsText, Math.round(fats), selectedDate.toString());
+        setPBDetail(pbCarbohydrates, "carbo", carbohydratesText, Math.round(carbohydrates), selectedDate.toString());
+
+        SetText(kcalText, mainSum, Math.round(sumKcal), pbKcal);
+        SetText(bfKcalText, sumBf, Math.round(sumKcal*30/100), pbBreakfast);
+        SetText(lunchKcalText, sumLunch, Math.round(sumKcal*30/100), pbLunch);
+        SetText(dinnerKcalText, sumDinner, Math.round(sumKcal*25/100), pbDinner);
+        SetText(snackKcalText, sumSnack, Math.round(sumKcal*15/100), pbSnack);
+
+
+    }
+
+    public void SetText(TextView text, float sum, int kcal, ProgressBar pb)
+    {
+        text.setText(sum +" / " + kcal + " кКал");
+        pb.setMax(kcal);
+        pb.setProgress(Math.round(sum));
     }
 
     private void SetTextInCategoty(String category, TextView list)
@@ -258,51 +300,22 @@ public class FragmentHome extends Fragment {
             default: kcal=0f; break;
         }
 
-
-        kcalText.setText(mainSum+" / "+Math.round(kcal)+" Ккал");
-        pbKcal.setMax(Math.round(kcal));
-        pbKcal.setProgress(Math.round(mainSum));
-
-        proteins = kcal * 0.3f /4;
-        fats = kcal * 0.3f /9;
-        carbohydrates = kcal * 0.4f /4;
-
-        setPBDetail(pbProtein, "protein", proteinText, Math.round(proteins));
-        setPBDetail(pbFats, "fat", fatsText, Math.round(fats));
-        setPBDetail(pbCarbohydrates, "carbo", carbohydratesText, Math.round(carbohydrates));
-
-        int bfKcal = Math.round(kcal*30/100);
-        bfKcalText.setText(sumBf +" / " + bfKcal + " ккал");
-        pbBreakfast.setMax(bfKcal);
-        pbBreakfast.setProgress(Math.round(sumBf));
-
-        int lunchKcal = Math.round(kcal*30/100);
-        lunchKcalText.setText(sumLunch + " / " + lunchKcal + " ккал");
-        pbLunch.setMax(lunchKcal);
-        pbLunch.setProgress(Math.round(sumLunch));
-
-        int dinnerKcal = Math.round(kcal*25/100);
-        dinnerKcalText.setText(sumDinner + " / " + dinnerKcal + " ккал");
-        pbDinner.setMax(dinnerKcal);
-        pbDinner.setProgress(Math.round(sumDinner));
-
-        int snackKcal = Math.round(kcal*15/100);
-        snackKcalText.setText(sumSnack + " / " + snackKcal + " ккал");
-        pbSnack.setMax(snackKcal);
-        pbSnack.setProgress(Math.round(sumSnack));
+        sumKcal = kcal;
     }
 
-    private void setPBDetail(ProgressBar pb, String detail, TextView text, int maxValue)
+    private void setPBDetail(ProgressBar pb, String detail, TextView text, int maxValue, String dateNow)
     {
         DatabaseHelper db = new DatabaseHelper(getActivity());
-        Float value = db.getSum(detail, "");
+        Float value = db.getSum(detail, "", dateNow);
         text.setText(value+" / "+maxValue+" гр");
         pb.setMax(360);
+
 
         if(Math.round(value)>maxValue)
             pb.setProgress(115);
         else
             pb.setProgress(115*Math.round(value)/maxValue);
+
     }
 
     private void PostmanInterface(String str){
@@ -316,12 +329,21 @@ public class FragmentHome extends Fragment {
         intent.putExtra("textMeal", str);
         startActivity(intent);
     }
-    
-    public void previousDayAction(){
 
+    public void setDatView()
+    {
+        textMonth.setText(CalendarUtils.monthDayFromDate(selectedDate));
+        date = selectedDate.toString();
+        loadData();
+    }
+
+    public void previousDayAction(){
+        selectedDate = selectedDate.minusDays(1);
+        setDatView();
     }
 
     public void nextDayAction(){
-
+        selectedDate = selectedDate.plusDays(1);
+        setDatView();
     }
 }

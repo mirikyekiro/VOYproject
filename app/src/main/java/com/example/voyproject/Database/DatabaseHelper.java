@@ -128,9 +128,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Cursor readAllDataCATEGORYLIST(String textMeal){
+    public Cursor readAllDataCATEGORYLIST(String textMeal, String date){
         String query = "SELECT * FROM " + TABLE_NAME_CATEGORYLIST +
-                " WHERE " + FOOD_CATEGORY + " LIKE " + " '" + textMeal + "' ";
+                " WHERE " + FOOD_CATEGORY + " LIKE " + " '" + textMeal + "' AND date LIKE '"+date+"'";
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -141,13 +141,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Float getSum(String str, String category){
+    public Float getSum(String str, String category, String date){
+        Log.d("date", date);
+
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor;
         if(category == "")
-            cursor = db.query (TABLE_NAME_CATEGORYLIST, new String[] {"SUM("+str+")"}, null, null, null, null, null);
+            cursor = db.query (TABLE_NAME_CATEGORYLIST, new String[] {"SUM("+str+"), date"}, "date = ?", new String[] {date}, null, null, null);
         else
-            cursor = db.query (TABLE_NAME_CATEGORYLIST, new String[] {"SUM("+str+"), category"}, "category = ?", new String[] {category}, null, null, null);
+            cursor = db.query (TABLE_NAME_CATEGORYLIST, new String[] {"SUM("+str+"), category, date"}, "category = '"+category+"' AND date = '"+date+"'", null, null, null, null);
 
         float sum;
         if(cursor.moveToFirst())

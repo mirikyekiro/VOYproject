@@ -1,6 +1,7 @@
 package com.example.voyproject.AddFood;
 
 
+import static com.example.voyproject.Calendar.CalendarUtils.selectedDate;
 import static java.lang.Integer.valueOf;
 
 import android.app.Activity;
@@ -69,7 +70,6 @@ public class FoodDetailed extends AppCompatActivity {
             DatabaseHelper db = new DatabaseHelper(context);
             @Override
             public void onClick(View v) {
-                String date = new SimpleDateFormat("d MMMM", Locale.getDefault()).format(new Date());
                 if(grammText.getText().toString() == "")
                 {
                     db.moveFood(
@@ -80,7 +80,7 @@ public class FoodDetailed extends AppCompatActivity {
                             carbohydrat,
                             "100",
                             textMeal,
-                            date);
+                            selectedDate.toString());
                 }
                 else
                 {
@@ -92,7 +92,7 @@ public class FoodDetailed extends AppCompatActivity {
                             carbohydrat,
                             grammText.getText().toString(),
                             textMeal,
-                            date);
+                            selectedDate.toString());
                 }
                 finish();
             }

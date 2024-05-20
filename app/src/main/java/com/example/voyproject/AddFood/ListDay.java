@@ -1,5 +1,7 @@
 package com.example.voyproject.AddFood;
 
+import static com.example.voyproject.Calendar.CalendarUtils.selectedDate;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -70,7 +72,7 @@ public class ListDay extends AppCompatActivity {
     }
 
     void storeDataInArrays(String textMeal){
-        Cursor cursor = databaseHelper.readAllDataCATEGORYLIST(textMeal);
+        Cursor cursor = databaseHelper.readAllDataCATEGORYLIST(textMeal, selectedDate.toString());
         if(cursor.getCount() == 0){
             Toast.makeText(this, "No data.", Toast.LENGTH_LONG).show();
         }

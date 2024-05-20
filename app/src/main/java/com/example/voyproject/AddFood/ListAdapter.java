@@ -1,5 +1,7 @@
 package com.example.voyproject.AddFood;
 
+import static com.example.voyproject.Calendar.CalendarUtils.selectedDate;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -18,10 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.voyproject.Database.DatabaseHelper;
 import com.example.voyproject.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder>{
     Context context;
@@ -87,7 +86,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder>{
             DatabaseHelper db = new DatabaseHelper(context);
             @Override
             public void onClick(View v) {
-                String date = new SimpleDateFormat("d MMMM", Locale.getDefault()).format(new Date());
                 db.moveFood(
                         String.valueOf(food_name.get(position)),
                         String.valueOf(food_kcal.get(position)),
@@ -96,7 +94,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder>{
                         String.valueOf(food_carbo.get(position)),
                         String.valueOf(food_gramm.get(position)),
                         textMeal,
-                        date);
+                        selectedDate.toString());
             }
         });
     }
