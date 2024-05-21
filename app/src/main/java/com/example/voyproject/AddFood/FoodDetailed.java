@@ -106,8 +106,8 @@ public class FoodDetailed extends AppCompatActivity {
     void ConfirmDialog()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete " + name + " ?");
-        builder.setMessage("Are you sure you want to delete " + name + " ?");
+        builder.setTitle("Удалить " + name + " ?");
+        builder.setMessage("Вы уверены, что хотите удалить " + name + " ?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

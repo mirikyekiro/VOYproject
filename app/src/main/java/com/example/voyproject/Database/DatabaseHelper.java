@@ -51,12 +51,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_FOODLIST);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_CATEGORYLIST);
         onCreate(db);
+    }
+
+    public void deleteTable()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM "+TABLE_NAME_CATEGORYLIST);
     }
 
     public void addFood(String name, String kcal, String protein, String fat, String carbo, String gramm){

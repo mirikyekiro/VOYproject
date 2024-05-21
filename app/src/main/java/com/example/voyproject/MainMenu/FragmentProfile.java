@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.voyproject.AddFood.FoodDetailed;
+import com.example.voyproject.Database.DatabaseHelper;
 import com.example.voyproject.R;
 import com.example.voyproject.StartScreen.StartScreen;
 
@@ -95,6 +97,10 @@ public class FragmentProfile extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         ed.clear();
                         ed.commit();
+
+                        DatabaseHelper myDB = new DatabaseHelper(getActivity());
+                        myDB.deleteTable();
+
                         startActivity(new Intent(activity, StartScreen.class));
                         activity.finish();
                     }
