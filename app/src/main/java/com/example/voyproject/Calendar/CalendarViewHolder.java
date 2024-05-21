@@ -10,13 +10,14 @@ import com.example.voyproject.R;
 
 public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 {
-    public final TextView dayOfMonth, kcal;
+    public final TextView dayOfMonth, kcal, back;
     private final CalendarAdapter.OnItemListener onItemListener;
     public CalendarViewHolder(@NonNull View itemView, CalendarAdapter.OnItemListener onItemListener)
     {
         super(itemView);
         dayOfMonth = itemView.findViewById(R.id.cellDayText);
         kcal = itemView.findViewById(R.id.cellInfoText);
+        back = itemView.findViewById(R.id.back);
         this.onItemListener = onItemListener;
         itemView.setOnClickListener(this);
     }
@@ -24,6 +25,6 @@ public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.
     @Override
     public void onClick(View view)
     {
-        onItemListener.onItemClick(getAdapterPosition(), (String) dayOfMonth.getText());
+        onItemListener.onItemClick(getAdapterPosition(), (String) kcal.getText(), (String) dayOfMonth.getText());
     }
 }

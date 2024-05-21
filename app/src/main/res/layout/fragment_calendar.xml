@@ -14,13 +14,13 @@
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp">
         <Button
+            android:id="@+id/lastMonth"
             android:layout_width="6dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Пред."
             android:background="@null"
             android:textStyle="bold"
-            android:onClick="previousMonthAction"
             android:textSize="20sp"/>
 
         <TextView
@@ -34,13 +34,13 @@
             android:textColor="@color/black"/>
 
         <Button
+            android:id="@+id/nextMonth"
             android:layout_width="6dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="След."
             android:background="@null"
             android:textStyle="bold"
-            android:onClick="nextMonthAction"
             android:textSize="20sp"/>
 
     </LinearLayout>

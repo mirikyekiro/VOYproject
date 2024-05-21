@@ -27,7 +27,8 @@ import java.util.Locale;
 
 public class FoodDetailed extends AppCompatActivity {
 
-    String id, name, kcal, protein, fat, carbohydrat, gramm, textMeal;
+    Float kcal, protein, fat, carbohydrat, gramm;
+    String id, name, textMeal;
     TextView nameText, kcalText, proteinText, fatText, carbohydratText;
     EditText grammText;
     ListAdapter adapter;
@@ -36,16 +37,19 @@ public class FoodDetailed extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        DatabaseHelper db = new DatabaseHelper(this);
+
         setContentView(R.layout.activity_detailed);
         Bundle arguments = getIntent().getExtras();
 
         id = arguments.get("id").toString();
         name = arguments.get("name").toString();
-        kcal = arguments.get("kcal").toString();
-        protein = arguments.get("protein").toString();
-        fat = arguments.get("fat").toString();
-        carbohydrat = arguments.get("carbo").toString();
-        gramm = arguments.get("gramm").toString();
+        kcal = Float.parseFloat(arguments.get("kcal").toString());
+        protein = Float.parseFloat(arguments.get("protein").toString());
+        fat = Float.parseFloat(arguments.get("fat").toString());
+        carbohydrat = Float.parseFloat(arguments.get("carbo").toString());
+        gramm = Float.parseFloat(arguments.get("gramm").toString());
         textMeal = arguments.get("textMeal").toString();
 
         nameText = this.findViewById(R.id.detailName);
@@ -67,33 +71,19 @@ public class FoodDetailed extends AppCompatActivity {
         Button back = this.findViewById(R.id.btnBackAddFodd);
 
         add.setOnClickListener(new View.OnClickListener() {
-            DatabaseHelper db = new DatabaseHelper(context);
+
             @Override
             public void onClick(View v) {
-                if(grammText.getText().toString() == "")
-                {
-                    db.moveFood(
-                            name,
-                            kcal,
-                            protein,
-                            fat,
-                            carbohydrat,
-                            "100",
-                            textMeal,
-                            selectedDate.toString());
-                }
-                else
-                {
-                    db.moveFood(
-                            name,
-                            kcal,
-                            protein,
-                            fat,
-                            carbohydrat,
-                            grammText.getText().toString(),
-                            textMeal,
-                            selectedDate.toString());
-                }
+                float gramms = Float.parseFloat(grammText.getText().toString()) / 100;
+                db.moveFood(
+                        name,
+                        (kcal* gramms) + "",
+                        (protein* gramms) + "",
+                        (fat* gramms) + "",
+                        (carbohydrat* gramms) + "",
+                        grammText.getText().toString(),
+                        textMeal,
+                        selectedDate.toString());
                 finish();
             }
         });

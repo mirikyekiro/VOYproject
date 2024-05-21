@@ -117,7 +117,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Cursor readAllData(){
-        String query = "SELECT * FROM " + TABLE_NAME_FOODLIST;
+        String query = "SELECT * FROM " + TABLE_NAME_FOODLIST + " ORDER BY name";
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -130,7 +130,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor readAllDataCATEGORYLIST(String textMeal, String date){
         String query = "SELECT * FROM " + TABLE_NAME_CATEGORYLIST +
-                " WHERE " + FOOD_CATEGORY + " LIKE " + " '" + textMeal + "' AND date LIKE '"+date+"'";
+                " WHERE " + FOOD_CATEGORY + " LIKE " + " '" + textMeal + "' AND date LIKE '"+date+"' ORDER BY name";
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -142,7 +142,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Float getSum(String str, String category, String date){
-        Log.d("date", date);
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor;
@@ -156,7 +155,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             sum = valueOf(cursor.getInt(0));
         else sum = 0;
 
-        Log.d("SUKA", ""+valueOf(cursor.getInt(0)));
 
         db.close();
         return sum;

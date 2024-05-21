@@ -215,7 +215,6 @@ public class FragmentHome extends Fragment {
 
     public void loadData()
     {
-        Log.d("dateFH", selectedDate + "");
         sumBf = db.getSum("kcal", "Завтрак", selectedDate.toString());
         sumLunch = db.getSum("kcal", "Обед", selectedDate.toString());
         sumDinner = db.getSum("kcal", "Ужин", selectedDate.toString());

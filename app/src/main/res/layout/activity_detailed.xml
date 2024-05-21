@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".AddFood.FoodDetailed"
     android:background="#FFF9FCFF">
@@ -65,13 +66,28 @@
 
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/detailGramm"
-        android:layout_width="200sp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/grammError"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:hint="100гр"
-        android:layout_margin="15sp"/>
+        android:layout_gravity="center"
+        app:errorEnabled="false"
+        android:layout_marginTop="50sp">
+        <EditText
+            android:id="@+id/detailGramm"
+            android:layout_width="300dp"
+            android:layout_height="48sp"
+            android:hint="Граммы"
+            android:text="100"
+            android:textColorHint="#888888"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_gravity="end"
+            android:inputType="numberDecimal">
+        </EditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/btnAdd"

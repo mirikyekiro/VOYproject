@@ -11,7 +11,7 @@ public class CalendarUtils {
     public static LocalDate selectedDate;
     public static String monthDayFromDate(LocalDate date)
     {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM y");
         return date.format(formatter);
     }
 
