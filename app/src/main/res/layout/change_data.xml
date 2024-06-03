@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Введите данные от специалиста"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp">
+        </TextView>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/kcalError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:errorEnabled="true"
+            android:layout_marginTop="25dp">
+
+            <EditText
+                android:id="@+id/editKcal"
+                android:layout_width="300dp"
+                android:layout_height="48sp"
+                android:hint="Количество калорий в день"
+                android:textColorHint="#888888"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+
+                android:inputType="text">
+            </EditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/proteinError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:errorEnabled="true"
+                android:layout_margin="10sp"
+                android:layout_marginRight="5sp">
+                <EditText
+                    android:id="@+id/editProtein"
+                    android:layout_width="100dp"
+                    android:layout_height="48sp"
+                    android:hint="Белки"
+                    android:textColorHint="#888888"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:layout_gravity="start"
+                    android:inputType="number">
+                </EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fatsError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5sp"
+                android:layout_marginRight="5sp">
+                <EditText
+                    android:id="@+id/editFats"
+                    android:layout_width="100dp"
+                    android:layout_height="48sp"
+                    android:hint="Жиры"
+                    android:textColorHint="#888888"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:layout_gravity="center"
+                    android:inputType="numberDecimal">
+                </EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/carboError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:errorEnabled="true"
+                android:layout_marginLeft="10sp">
+                <EditText
+                    android:id="@+id/editCarbo"
+                    android:layout_width="100dp"
+                    android:layout_height="48sp"
+                    android:hint="Углеводы"
+                    android:textColorHint="#888888"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:layout_gravity="end"
+                    android:inputType="numberDecimal">
+                </EditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/bfError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:errorEnabled="true">
+
+            <EditText
+                android:id="@+id/editBf"
+                android:layout_width="300dp"
+                android:layout_height="48sp"
+                android:hint="Количество калорий на завтрак"
+                android:textColorHint="#888888"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+
+                android:inputType="text">
+            </EditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lunchError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:errorEnabled="true">
+
+            <EditText
+                android:id="@+id/editLunch"
+                android:layout_width="300dp"
+                android:layout_height="48sp"
+                android:hint="Количество калорий на обед"
+                android:textColorHint="#888888"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+
+                android:inputType="text">
+            </EditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dinnerError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:errorEnabled="true">
+
+            <EditText
+                android:id="@+id/editDinner"
+                android:layout_width="300dp"
+                android:layout_height="48sp"
+                android:hint="Количество калорий на ужин"
+                android:textColorHint="#888888"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+
+                android:inputType="text">
+            </EditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/snackError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:errorEnabled="true">
+
+            <EditText
+                android:id="@+id/editSnack"
+                android:layout_width="300dp"
+                android:layout_height="48sp"
+                android:hint="Количество калорий на перекус"
+                android:textColorHint="#888888"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+
+                android:inputType="text">
+            </EditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnSaveData"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="@string/String_save"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:backgroundTint="#EFCD25"
+            android:layout_gravity="center">
+
+        </Button>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

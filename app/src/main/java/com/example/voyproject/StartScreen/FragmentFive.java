@@ -53,8 +53,7 @@ public class FragmentFive extends Fragment {
                 ed.putString(APP_PREFERENCES_TYPE_WORKOUT_name, checkedRadioButton.getText().toString());
                 ed.commit();
 
-                startActivity(new Intent(activity, MainMenu.class));
-                activity.finish();
+                Navigation.findNavController(view).navigate(R.id.action_fragmentFive_to_fragmentSix);
 
             }
         });

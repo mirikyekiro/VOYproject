@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.voyproject.AddFood.FoodDetailed;
 import com.example.voyproject.Database.DatabaseHelper;
 import com.example.voyproject.R;
+import com.example.voyproject.StartScreen.FragmentTwo;
 import com.example.voyproject.StartScreen.StartScreen;
 
 public class FragmentProfile extends Fragment {
@@ -32,9 +33,15 @@ public class FragmentProfile extends Fragment {
     public static final String APP_PREFERENCES_DESWEIGHT = "DesiredWeight";
     public static final String APP_PREFERENCES_SEX_name = "SexName";
 
-    TextView name, age, height, weight, type, lifestyle, desiredWeight, sex;
-    Button deleteProfile;
 
+    public static final String APP_PREFERENCES_TYPE_POSITION_name = "TypePositionName";
+    public static final String APP_PREFERENCES_TYPE_HBP = "HBP";
+    public static final String APP_PREFERENCES_TYPE_GSD = "GSD";
+    public static final String APP_PREFERENCES_TYPE_DIABET = "TypeDiabetName";
+
+    TextView name, age, height, weight, type, lifestyle, desiredWeight, sex, typePosition;
+    Button deleteProfile, btnChangeData;
+    String position, hbp, gsd, diabet;
     SharedPreferences sPref;
 
 
@@ -56,9 +63,15 @@ public class FragmentProfile extends Fragment {
         lifestyle = view.findViewById(R.id.lifestyle);
         desiredWeight = view.findViewById(R.id.weightDesired);
         sex = view.findViewById(R.id.sex);
+        typePosition = view.findViewById(R.id.typePosition);
 
         deleteProfile = view.findViewById(R.id.deleteProfile);
+        btnChangeData = view.findViewById(R.id.btnChangeProfile);
 
+        position = sPref.getString(APP_PREFERENCES_TYPE_POSITION_name, "");
+        hbp = sPref.getString(APP_PREFERENCES_TYPE_HBP, "");
+        gsd = sPref.getString(APP_PREFERENCES_TYPE_GSD, "");
+        diabet = sPref.getString(APP_PREFERENCES_TYPE_DIABET, "");
 
         name.setText(sPref.getString(APP_PREFERENCES_NAME, ""));
         age.setText("Возраст: " + sPref.getInt(APP_PREFERENCES_AGE, 0));
@@ -68,11 +81,29 @@ public class FragmentProfile extends Fragment {
         lifestyle.setText("Образ жизни: " + sPref.getString(APP_PREFERENCES_TYPE_WORKOUT_name, ""));
         sex.setText("Пол: " + sPref.getString(APP_PREFERENCES_SEX_name, ""));
 
+
+
         if(sPref.contains(APP_PREFERENCES_DESWEIGHT)){
             desiredWeight.setVisibility(View.VISIBLE);
             desiredWeight.setText("Желаемый вес: " + sPref.getFloat(APP_PREFERENCES_DESWEIGHT, 0.0f));
         }
         else desiredWeight.setVisibility(View.INVISIBLE);
+
+        typePosition.setText("Тип: " + position + " " +hbp + " "+ gsd + " " + diabet);
+
+        String typePos = typePosition.getText().toString();
+
+        if(typePos == "Тип:    ")
+            typePosition.setVisibility(View.INVISIBLE);
+        else
+            typePosition.setVisibility(View.VISIBLE);
+
+        btnChangeData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(activity, FragmentTwo.class));
+            }
+        });
 
         deleteProfile.setOnClickListener(new View.OnClickListener() {
             @Override

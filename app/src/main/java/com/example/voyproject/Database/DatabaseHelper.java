@@ -146,7 +146,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Float getSum(String str, String category, String date){
+    public float getSum(String str, String category, String date){
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor;

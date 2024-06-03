@@ -15,17 +15,17 @@ public class SplashActivity extends AppCompatActivity {
 
     SharedPreferences sPref;
     public static final String APP_PREFERENCES = "myProfile";
-    public static final String APP_PREFERENCES_TYPE_WORKOUT = "TypeWorkout";
+    public static final String DATA_SAVE = "DATA_SAVE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         sPref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor ed = sPref.edit();
 
+        boolean data_save = sPref.getBoolean(DATA_SAVE, false);
 
-        if(sPref.contains(APP_PREFERENCES_TYPE_WORKOUT)) {
+        if(data_save) {
             startActivity(new Intent(this, MainMenu.class));
             finish();
         }

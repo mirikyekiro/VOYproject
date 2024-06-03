@@ -97,8 +97,12 @@ public class FragmentCalendar extends Fragment implements CalendarAdapter.OnItem
             }
             else
             {
-                query = yearMonth +"-"+ String.valueOf(i - dayOfWeek);
+                if(i - dayOfWeek<10)
+                 query = yearMonth +"-"+ "0"+String.valueOf(i - dayOfWeek);
+                else query = yearMonth +"-"+ String.valueOf(i - dayOfWeek);
+
                 value = db.getSum("kcal", "", query);
+
                 if(value == 0f)
                     kcals.add(null);
                 else

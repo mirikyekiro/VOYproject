@@ -22,6 +22,7 @@ import android.widget.Button;
 import com.example.voyproject.AddFood.ListDay;
 import com.example.voyproject.AddFood.MainActivityFood;
 import com.example.voyproject.Calendar.CalendarUtils;
+import com.example.voyproject.ChangeData;
 import com.example.voyproject.Database.DatabaseHelper;
 import com.example.voyproject.R;
 
@@ -31,25 +32,25 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 
 public class FragmentHome extends Fragment {
-    int sexID, typeID, workoutID, age;
-    float heightData, weightData;
     SharedPreferences sPref;
     public static final String APP_PREFERENCES = "myProfile";
-    public static final String APP_PREFERENCES_SEX = "SexID";
-    public static final String APP_PREFERENCES_TYPE = "TypeID";
-    public static final String APP_PREFERENCES_TYPE_WORKOUT = "TypeWorkout";
-    public static final String APP_PREFERENCES_AGE = "Age";
-    public static final String APP_PREFERENCES_HEIGHT = "Height";
-    public static final String APP_PREFERENCES_WEIGHT = "Weight";
+    public static final String APP_PREFERENCES_KCAL = "Kcal";
+    public static final String APP_PREFERENCES_PROTEIN = "Protein";
+    public static final String APP_PREFERENCES_FATS = "Fats";
+    public static final String APP_PREFERENCES_CARBO = "Carbo";
+    public static final String APP_PREFERENCES_BREAKFAST = "BreakFast";
+    public static final String APP_PREFERENCES_LUNCH = "Lunch";
+    public static final String APP_PREFERENCES_DINNER = "Dinner";
+    public static final String APP_PREFERENCES_SNACKS = "Snacks";
 
-    TextView kcalText, proteinText, fatsText, carbohydratesText, bfKcalText, lunchKcalText, dinnerKcalText, snackKcalText, textDate, textMonth, listTextBreakFast, listTextDinner, listTextLunch, listTextSnack;
+    TextView kcalText, proteinText, fatsText, carbohydratesText, bfKcalText, lunchKcalText, dinnerKcalText, snackKcalText, textMonth, listTextBreakFast, listTextDinner, listTextLunch, listTextSnack;
     ProgressBar pbKcal, pbProtein, pbFats, pbCarbohydrates, firstArgTrans, secondArgTrans, thirdArgTrans, pbBreakfast, pbLunch, pbDinner, pbSnack;
-    float kCal, proteins, fats, carbohydrates;
+    float proteins, fats, carbohydrates, kCal, bf, lunch, dinner, snack, sumBf, sumLunch, sumDinner, sumSnack, mainSum, sumProtein, sumFat, sumCarbo;
     Button btnBreakfast, btnLunch, btnDinner, btnSnack, backDate, nextDate;
     LinearLayout llBreakfast, llLunch, llDinner, llSnack;
-    Float sumBf, sumLunch, sumDinner, sumSnack, mainSum, sumProtein, sumFat, sumCarbo, sumKcal;
     DatabaseHelper db;
     String date;
+    View btn_changeData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,21 +61,23 @@ public class FragmentHome extends Fragment {
         db = new DatabaseHelper(getActivity());
         db.create_db();
 
-        selectedDate = LocalDate.now();
-
-        Activity activity = getActivity();
+        Activity activity = this.getActivity();
 
         sPref = activity.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
 
-        sexID = sPref.getInt(APP_PREFERENCES_SEX, 0);
-        typeID = sPref.getInt(APP_PREFERENCES_TYPE, 0);
-        workoutID = sPref.getInt(APP_PREFERENCES_TYPE_WORKOUT, 0);
-        age = sPref.getInt(APP_PREFERENCES_AGE, 0);
-        heightData = sPref.getFloat(APP_PREFERENCES_HEIGHT, 0f);
-        weightData = sPref.getFloat(APP_PREFERENCES_WEIGHT, 0f);
+        selectedDate = LocalDate.now();
 
         textMonth = view.findViewById(R.id.monthDay);
+
+        kCal = sPref.getFloat(APP_PREFERENCES_KCAL, 0f);
+        proteins = sPref.getFloat(APP_PREFERENCES_PROTEIN, 0f);
+        fats = sPref.getFloat(APP_PREFERENCES_FATS, 0f);
+        carbohydrates = sPref.getFloat(APP_PREFERENCES_CARBO, 0f);
+        bf = sPref.getFloat(APP_PREFERENCES_BREAKFAST, 0f);
+        lunch = sPref.getFloat(APP_PREFERENCES_LUNCH, 0f);
+        dinner = sPref.getFloat(APP_PREFERENCES_DINNER, 0f);
+        snack = sPref.getFloat(APP_PREFERENCES_SNACKS, 0f);
 
         kcalText = view.findViewById(R.id.textKcal);
         proteinText = view.findViewById(R.id.textProtein);
@@ -103,14 +106,6 @@ public class FragmentHome extends Fragment {
         secondArgTrans.setProgress(30);
         thirdArgTrans.setProgress(30);
 
-        if(typeID == 0)
-            CalculationOfKcalDesired(sexID, workoutID, age, heightData, weightData);
-        else if(typeID == 1)
-            CalculationOfKcalGain(sexID, workoutID, age, heightData, weightData);
-        else
-            CalculationOfKcalSave(sexID, workoutID, age, heightData, weightData);
-
-
         btnBreakfast = view.findViewById(R.id.btnBreakast);
         btnLunch = view.findViewById(R.id.btnLunch);
         btnDinner = view.findViewById(R.id.btnDinner);
@@ -127,6 +122,15 @@ public class FragmentHome extends Fragment {
         listTextDinner = view.findViewById(R.id.listTextDinner);
         listTextLunch = view.findViewById(R.id.listTextLunch);
         listTextSnack = view.findViewById(R.id.listTextSnack);
+
+        btn_changeData = view.findViewById(R.id.btnChangeHome);
+
+        btn_changeData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(activity, ChangeData.class));
+            }
+        });
 
         llBreakfast.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -224,27 +228,23 @@ public class FragmentHome extends Fragment {
         sumFat = db.getSum("fat", "", selectedDate.toString());
         sumCarbo = db.getSum("carbo", "", selectedDate.toString());
 
-        proteins = sumKcal * 0.3f /4;
-        fats = sumKcal * 0.3f /9;
-        carbohydrates = sumKcal * 0.4f /4;
 
         setPBDetail(pbProtein, "protein", proteinText, Math.round(proteins), selectedDate.toString());
         setPBDetail(pbFats, "fat", fatsText, Math.round(fats), selectedDate.toString());
         setPBDetail(pbCarbohydrates, "carbo", carbohydratesText, Math.round(carbohydrates), selectedDate.toString());
 
-        SetText(kcalText, mainSum, Math.round(sumKcal), pbKcal);
-        SetText(bfKcalText, sumBf, Math.round(sumKcal*30/100), pbBreakfast);
-        SetText(lunchKcalText, sumLunch, Math.round(sumKcal*30/100), pbLunch);
-        SetText(dinnerKcalText, sumDinner, Math.round(sumKcal*25/100), pbDinner);
-        SetText(snackKcalText, sumSnack, Math.round(sumKcal*15/100), pbSnack);
-
+        SetText(kcalText, mainSum, kCal, pbKcal);
+        SetText(bfKcalText, sumBf, bf, pbBreakfast);
+        SetText(lunchKcalText, sumLunch, lunch, pbLunch);
+        SetText(dinnerKcalText, sumDinner, dinner, pbDinner);
+        SetText(snackKcalText, sumSnack, snack, pbSnack);
 
     }
 
-    public void SetText(TextView text, float sum, int kcal, ProgressBar pb)
+    public void SetText(TextView text, float sum, float kcal, ProgressBar pb)
     {
         text.setText(sum +" / " + kcal + " кКал");
-        pb.setMax(kcal);
+        pb.setMax(Math.round(kcal));
         pb.setProgress(Math.round(sum));
     }
 
@@ -252,54 +252,6 @@ public class FragmentHome extends Fragment {
     {
         DatabaseHelper db = new DatabaseHelper(getActivity());
         list.setText(db.getNameFood(category));
-    }
-
-    private void CalculationOfKcalDesired(int sex, int workout, int age, float height, float weight){
-        if(sex == 0) {
-            kCal = 447.6f + (9.2f * weight) + (3.1f * height) - (4.3f * age);
-        }
-        else {
-            kCal = 88.36f + (13.4f * weight) + (4.8f * height) - (5.7f * age);
-        }
-
-        float cal = kCal - 500;
-        Lifestyle(cal, workoutID);
-    }
-
-    private void CalculationOfKcalGain(int sex, int workout, int age, float height, float weight){
-        if(sex == 0) {
-            kCal = 447.6f + (9.2f * weight) + (3.1f * height) - (4.3f * age);
-        }
-        else {
-            kCal = 88.36f + (13.4f * weight) + (4.8f * height) - (5.7f * age);
-        }
-
-        int cal = Math.round(kCal + 500);
-        Lifestyle(cal, workoutID);
-    }
-
-    private void CalculationOfKcalSave(int sex, int workout, int age, float height, float weight){
-        if(sex == 0) {
-            kCal = 447.6f + (9.2f * weight) + (3.1f * height) - (4.3f * age);
-        }
-        else {
-            kCal = 88.36f + (13.4f * weight) + (4.8f * height) - (5.7f * age);
-        }
-
-        Lifestyle(kCal, workoutID);
-    }
-
-    private void Lifestyle(float kcal, int workout){
-        switch(workout){
-            case 0: kcal *= 1.2f; break;
-            case 1: kcal *= 1.375f; break;
-            case 2: kcal *= 1.55f; break;
-            case 3: kcal *= 1.725f; break;
-            case 4: kcal *= 1.9f; break;
-            default: kcal=0f; break;
-        }
-
-        sumKcal = kcal;
     }
 
     private void setPBDetail(ProgressBar pb, String detail, TextView text, int maxValue, String dateNow)
