@@ -56,6 +56,10 @@
             android:name=".ChangeData">
 
         </activity>
+        <activity
+            android:name=".AddFood.Group">
+
+        </activity>
 
 
     </application>

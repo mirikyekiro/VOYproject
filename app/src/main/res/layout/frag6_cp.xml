@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_editor_absoluteX="1dp"
     app:layout_editor_absoluteY="1dp"
@@ -26,128 +26,118 @@
             android:layout_marginTop="50dp">
         </TextView>
 
-        <RadioGroup
-            android:id="@+id/radioGroup3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp">
-
-        <RadioButton
+        <ToggleButton
             android:id="@+id/pregnancy1"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="Беременность (I триместр)"
+            android:textOn="Беременность (I триместр)"
+            android:textOff="Беременность (I триместр)"
             android:padding="16dp"
             android:button="@color/white"
             android:background="@drawable/radio_selector"
             android:elevation="4dp"
             android:layout_gravity="center"
             android:layout_margin="5dp">
-        </RadioButton>
+        </ToggleButton>
 
-        <RadioButton
+        <ToggleButton
             android:id="@+id/pregnancy2"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="Беременность (II триместр)"
+            android:textOn="Беременность (II триместр)"
+            android:textOff="Беременность (II триместр)"
             android:padding="16dp"
             android:button="@color/white"
             android:background="@drawable/radio_selector"
             android:elevation="4dp"
             android:layout_gravity="center"
             android:layout_margin="5dp">
-        </RadioButton>
+        </ToggleButton>
 
-        <RadioButton
+        <ToggleButton
             android:id="@+id/pregnancy3"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="Беременность (III триместр)"
+            android:textOn="Беременность (III триместр)"
+            android:textOff="Беременность (III триместр)"
             android:padding="16dp"
             android:button="@color/white"
             android:background="@drawable/radio_selector"
             android:elevation="4dp"
             android:layout_gravity="center"
             android:layout_margin="5dp">
-        </RadioButton>
+        </ToggleButton>
 
-        </RadioGroup>
-
-        <RadioButton
+        <ToggleButton
             android:id="@+id/hbp"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="ХБП/ХПН (требуется консультация у специалиста)"
+            android:textOn="ХБП/ХПН (требуется консультация у специалиста)"
+            android:textOff="ХБП/ХПН (требуется консультация у специалиста)"
             android:padding="16dp"
             android:button="@color/white"
             android:background="@drawable/radio_selector"
             android:elevation="4dp"
             android:layout_gravity="center"
             android:layout_margin="5dp">
-        </RadioButton>
+        </ToggleButton>
 
-        <RadioButton
+        <ToggleButton
             android:id="@+id/gsd"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="Гистационный диабет (у беременных)"
+            android:textOn="Гистационный диабет (у беременных)"
+            android:textOff="Гистационный диабет (у беременных)"
             android:padding="16dp"
             android:button="@color/white"
             android:background="@drawable/radio_selector"
             android:elevation="4dp"
             android:layout_gravity="center"
             android:layout_margin="5dp">
-        </RadioButton>
+        </ToggleButton>
 
-        <RadioGroup
-            android:id="@+id/radioGroup4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center">
-
-            <RadioButton
+            <ToggleButton
                 android:id="@+id/diabet1"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:text="Диабет (I)"
+                android:textOn="Диабет (I)"
+                android:textOff="Диабет (I)"
                 android:padding="16dp"
                 android:button="@color/white"
                 android:background="@drawable/radio_selector"
                 android:elevation="4dp"
                 android:layout_gravity="center"
                 android:layout_margin="5dp">
-            </RadioButton>
+            </ToggleButton>
 
-            <RadioButton
+            <ToggleButton
                 android:id="@+id/diabet2"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:text="Диабет (II)"
+                android:textOn="Диабет (II)"
+                android:textOff="Диабет (II)"
                 android:padding="16dp"
                 android:button="@color/white"
                 android:background="@drawable/radio_selector"
                 android:elevation="4dp"
                 android:layout_gravity="center"
                 android:layout_margin="5dp">
-            </RadioButton>
+            </ToggleButton>
 
-            <RadioButton
+            <ToggleButton
                 android:id="@+id/diabet3"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:text="Диабет (III)"
+                android:textOn="Диабет (III)"
+                android:textOff="Диабет (III)"
                 android:padding="16dp"
                 android:button="@color/white"
                 android:background="@drawable/radio_selector"
                 android:elevation="4dp"
                 android:layout_gravity="center"
                 android:layout_margin="5dp">
-            </RadioButton>
+            </ToggleButton>
 
-        </RadioGroup>
 
         <Button
             android:id="@+id/btnStart"

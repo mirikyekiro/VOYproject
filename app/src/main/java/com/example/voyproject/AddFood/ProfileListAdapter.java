@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.voyproject.Database.DatabaseHelper;
+import com.example.voyproject.MainMenu.FragmentHome;
 import com.example.voyproject.R;
 
 import java.text.SimpleDateFormat;
@@ -32,6 +34,7 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
         ArrayList food_id, food_name, food_kcal, food_protein, food_fat, food_carbo, food_gramm;
         ProfileListAdapter adapter = this;
         String textMeal;
+        String dataLine;
         ProfileListAdapter(Activity activity,
                 Context context,
                 ArrayList food_id,

@@ -101,7 +101,7 @@ public class FragmentProfile extends Fragment {
         btnChangeData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(activity, FragmentTwo.class));
+                getFragmentManager().beginTransaction().add(R.id.frag2, new FragmentTwo()).addToBackStack(null).commit();
             }
         });
 

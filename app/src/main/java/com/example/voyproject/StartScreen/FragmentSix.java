@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ToggleButton;
 
 import androidx.fragment.app.Fragment;
 
@@ -23,20 +24,15 @@ public class FragmentSix extends Fragment {
     int sexID;
     public static final String APP_PREFERENCES = "myProfile";
     public static final String APP_PREFERENCES_SEX = "SexID";
-    public static final String APP_PREFERENCES_TYPE_POSITION = "TypePositionID";
     public static final String APP_PREFERENCES_TYPE_POSITION_name = "TypePositionName";
-    public static final String APP_PREFERENCES_TYPE_DIABET = "TypeDiabetID";
     public static final String APP_PREFERENCES_TYPE_DIABET_name = "TypeDiabetName";
     public static final String APP_PREFERENCES_TYPE_HBP = "HBP";
     public static final String APP_PREFERENCES_TYPE_GSD = "GSD";
     public static final String DATA_SAVE = "DATA_SAVE";
     Button btnSave;
     SharedPreferences sPref;
-    RadioButton preg1RadioButton, preg2RadioButton, preg3RadioButton, hbpRadioButton, gsdRadioButton;
-    int radioButtonID1, radioButtonID2, position1, position2;
-    View radioButton1, radioButton2;
-    RadioGroup rg1, rg2;
-    RadioButton checkedRadioButton1, checkedRadioButton2;
+    ToggleButton preg1RadioButton, preg2RadioButton, preg3RadioButton, hbpRadioButton, gsdRadioButton, diabet1RadioButton, diabet2RadioButton, diabet3RadioButton;
+    ToggleButton pregBtn = null, diabetBtn = null;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,8 +48,9 @@ public class FragmentSix extends Fragment {
         preg3RadioButton = view.findViewById(R.id.pregnancy3);
         hbpRadioButton = view.findViewById(R.id.hbp);
         gsdRadioButton = view.findViewById(R.id.gsd);
-        rg1 = view.findViewById(R.id.radioGroup3);
-        rg2 = view.findViewById(R.id.radioGroup4);
+        diabet1RadioButton = view.findViewById(R.id.diabet1);
+        diabet2RadioButton = view.findViewById(R.id.diabet2);
+        diabet3RadioButton = view.findViewById(R.id.diabet3);
 
         sexID = sPref.getInt(APP_PREFERENCES_SEX, 0);
 
@@ -71,6 +68,30 @@ public class FragmentSix extends Fragment {
             gsdRadioButton.setEnabled(true);
         }
 
+        ToggleButton[] tb1 = {preg1RadioButton,preg2RadioButton,preg3RadioButton};
+        ToggleButton[] tb2 = {diabet1RadioButton,diabet2RadioButton, diabet3RadioButton};
+
+        View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()){
+                    case R.id.pregnancy1: pregBtn = CheckBtn(preg1RadioButton, tb1, pregBtn); break;
+                    case R.id.pregnancy2: pregBtn = CheckBtn(preg2RadioButton, tb1, pregBtn); break;
+                    case R.id.pregnancy3: pregBtn = CheckBtn(preg3RadioButton, tb1, pregBtn); break;
+                    case R.id.diabet1: diabetBtn = CheckBtn(diabet1RadioButton, tb2, diabetBtn); break;
+                    case R.id.diabet2: diabetBtn = CheckBtn(diabet2RadioButton, tb2, diabetBtn); break;
+                    case R.id.diabet3: diabetBtn = CheckBtn(diabet3RadioButton, tb2, diabetBtn); break;
+                }
+            }
+        };
+
+        preg1RadioButton.setOnClickListener(onClickListener);
+        preg2RadioButton.setOnClickListener(onClickListener);
+        preg3RadioButton.setOnClickListener(onClickListener);
+        diabet1RadioButton.setOnClickListener(onClickListener);
+        diabet2RadioButton.setOnClickListener(onClickListener);
+        diabet3RadioButton.setOnClickListener(onClickListener);
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,41 +103,17 @@ public class FragmentSix extends Fragment {
                     ed.putString(APP_PREFERENCES_TYPE_GSD, "Гистационно-сахарный диабет");
                 else ed.putString(APP_PREFERENCES_TYPE_GSD, "");
 
-                if(rg1.getCheckedRadioButtonId() != -1)
-                {
-                    radioButtonID1 = rg1.getCheckedRadioButtonId();
-                    radioButton1 = rg1.findViewById(radioButtonID1);
-                    position1 = rg1.indexOfChild(radioButton1);
-                    checkedRadioButton1 =  rg1.findViewById(radioButtonID1);
+                if(pregBtn != null)
+                    ed.putString(APP_PREFERENCES_TYPE_POSITION_name, pregBtn.getTextOn().toString());
+                else ed.putString(APP_PREFERENCES_TYPE_POSITION_name, "");
 
-                    ed.putInt(APP_PREFERENCES_TYPE_POSITION, position1);
-                    ed.putString(APP_PREFERENCES_TYPE_POSITION_name, checkedRadioButton1.getText().toString());
-                }
-                else
-                {
-                    ed.putInt(APP_PREFERENCES_TYPE_POSITION, 0);
-                    ed.putString(APP_PREFERENCES_TYPE_POSITION_name, "");
-                }
-
-                if(rg2.getCheckedRadioButtonId() != -1)
-                {
-                    radioButtonID2 = rg2.getCheckedRadioButtonId();
-                    radioButton2 = rg2.findViewById(radioButtonID2);
-                    position2 = rg2.indexOfChild(radioButton2);
-                    checkedRadioButton2 =  rg2.findViewById(radioButtonID2);
-
-                    ed.putInt(APP_PREFERENCES_TYPE_DIABET, position2);
-                    ed.putString(APP_PREFERENCES_TYPE_DIABET_name, checkedRadioButton2.getText().toString());
-                }
-                else
-                {
-                    ed.putInt(APP_PREFERENCES_TYPE_DIABET, 0);
-                    ed.putString(APP_PREFERENCES_TYPE_DIABET_name, "");
-                }
+                if(diabetBtn != null)
+                    ed.putString(APP_PREFERENCES_TYPE_DIABET_name, diabetBtn.getTextOn().toString());
+                else ed.putString(APP_PREFERENCES_TYPE_DIABET_name, "");
 
                 Calculation.SaveData(activity);
 
-                if(hbpRadioButton.isChecked()||gsdRadioButton.isChecked()||position2 != 1)
+                if(hbpRadioButton.isChecked()||gsdRadioButton.isChecked())
                 {
                     startActivity(new Intent(activity, ChangeData.class));
                     ed.putBoolean(DATA_SAVE, false);
@@ -135,4 +132,16 @@ public class FragmentSix extends Fragment {
 
         return view;
     }
+
+    public ToggleButton CheckBtn(ToggleButton mainBtn, ToggleButton[] btn, ToggleButton saveBtn)
+    {
+        for(int i= 0; i< btn.length; i++)
+        {
+            btn[i].setChecked(false);
+        }
+        mainBtn.setChecked(true);
+        saveBtn = mainBtn;
+        return saveBtn;
+    }
+
 }

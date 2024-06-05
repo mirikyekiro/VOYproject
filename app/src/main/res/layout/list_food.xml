@@ -53,10 +53,9 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"
         android:scrollbars="vertical"
-        tools:listitem="@layout/list_item"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout">
+        tools:listitem="@layout/list_item"/>
 
-    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

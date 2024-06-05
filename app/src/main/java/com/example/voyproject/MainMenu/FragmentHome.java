@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Button;
 
+import com.example.voyproject.AddFood.Group;
 import com.example.voyproject.AddFood.ListDay;
 import com.example.voyproject.AddFood.MainActivityFood;
 import com.example.voyproject.Calendar.CalendarUtils;
@@ -212,7 +213,7 @@ public class FragmentHome extends Fragment {
             }
         });
 
-        //SetTextInCategoty("Breakfast", listTextBreakFast);
+
         setDatView();
         return view;
     }
@@ -228,7 +229,6 @@ public class FragmentHome extends Fragment {
         sumFat = db.getSum("fat", "", selectedDate.toString());
         sumCarbo = db.getSum("carbo", "", selectedDate.toString());
 
-
         setPBDetail(pbProtein, "protein", proteinText, Math.round(proteins), selectedDate.toString());
         setPBDetail(pbFats, "fat", fatsText, Math.round(fats), selectedDate.toString());
         setPBDetail(pbCarbohydrates, "carbo", carbohydratesText, Math.round(carbohydrates), selectedDate.toString());
@@ -239,34 +239,33 @@ public class FragmentHome extends Fragment {
         SetText(dinnerKcalText, sumDinner, dinner, pbDinner);
         SetText(snackKcalText, sumSnack, snack, pbSnack);
 
+        SetTextInCategoty("Завтрак", listTextBreakFast);
+        SetTextInCategoty("Обед", listTextLunch);
+        SetTextInCategoty("Ужин", listTextDinner);
+        SetTextInCategoty("Перекус", listTextSnack);
     }
 
-    public void SetText(TextView text, float sum, float kcal, ProgressBar pb)
-    {
+    public void SetText(TextView text, float sum, float kcal, ProgressBar pb) {
         text.setText(sum +" / " + kcal + " кКал");
         pb.setMax(Math.round(kcal));
         pb.setProgress(Math.round(sum));
     }
 
-    private void SetTextInCategoty(String category, TextView list)
-    {
+    private void SetTextInCategoty(String category, TextView list) {
         DatabaseHelper db = new DatabaseHelper(getActivity());
-        list.setText(db.getNameFood(category));
+        list.setText(db.getNameFood(category, selectedDate.toString()));
     }
 
-    private void setPBDetail(ProgressBar pb, String detail, TextView text, int maxValue, String dateNow)
-    {
+    private void setPBDetail(ProgressBar pb, String detail, TextView text, int maxValue, String dateNow) {
         DatabaseHelper db = new DatabaseHelper(getActivity());
         Float value = db.getSum(detail, "", dateNow);
         text.setText(value+" / "+maxValue+" гр");
         pb.setMax(360);
 
-
         if(Math.round(value)>maxValue)
             pb.setProgress(115);
         else
             pb.setProgress(115*Math.round(value)/maxValue);
-
     }
 
     private void PostmanInterface(String str){
@@ -276,13 +275,12 @@ public class FragmentHome extends Fragment {
     }
 
     private void PostmanInterface2(String str){
-        Intent intent = new Intent(getActivity(), MainActivityFood.class);
+        Intent intent = new Intent(getActivity(), Group.class);
         intent.putExtra("textMeal", str);
         startActivity(intent);
     }
 
-    public void setDatView()
-    {
+    public void setDatView(){
         textMonth.setText(CalendarUtils.monthDayFromDate(selectedDate));
         date = selectedDate.toString();
         loadData();

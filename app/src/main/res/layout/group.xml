@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btnBackToMenu5"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:background="@drawable/arrow_back"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp">
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:layout_marginStart="10sp">
+
+            <ImageButton
+                android:id="@+id/btnOvoshi"
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                android:background="@drawable/ovoshi"
+                android:layout_margin="10sp"/>
+
+            <ImageButton
+                android:id="@+id/btnFrykti"
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                android:background="@drawable/frukty"
+                android:layout_margin="10sp"/>
+
+            <ImageButton
+                android:id="@+id/btnRyba"
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                android:background="@drawable/ryba"
+                android:layout_margin="10sp"/>
+
+            <ImageButton
+                android:id="@+id/btnMyaso"
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                android:background="@drawable/myaso"
+                android:layout_margin="10sp"/>
+
+            <ImageButton
+                android:id="@+id/btnPtica"
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                android:background="@drawable/ptica"
+                android:layout_margin="10sp"/>
+
+            <ImageButton
+                android:id="@+id/btnSubProd"
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                android:background="@drawable/subprod"
+                android:layout_margin="10sp"/>
+
+            <ImageButton
+                android:id="@+id/btnSyri"
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                android:background="@drawable/syry"
+                android:layout_margin="10sp"/>
+
+            <ImageButton
+                android:id="@+id/btnMaslo"
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                android:background="@drawable/masl"
+                android:layout_margin="10sp"/>
+
+            <ImageButton
+                android:id="@+id/btnHleb"
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                android:background="@drawable/hleb"
+                android:layout_margin="10sp"/>
+
+            <ImageButton
+                android:id="@+id/btnKrypi"
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                android:background="@drawable/krypy"
+                android:layout_margin="10sp"/>
+
+            <ImageButton
+                android:id="@+id/btnSahar"
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                android:background="@drawable/sahar"
+                android:layout_margin="10sp"/>
+
+            <ImageButton
+                android:id="@+id/btnSoki"
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                android:background="@drawable/soki"
+                android:layout_margin="10sp"/>
+
+            <ImageButton
+                android:id="@+id/btnAlco"
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                android:background="@drawable/alco"
+                android:layout_margin="10sp"/>
+
+            <ImageButton
+                android:id="@+id/btnMoloch"
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                android:background="@drawable/moloch"
+                android:layout_margin="10sp"/>
+
+
+        </GridLayout>
+
+    </ScrollView>
+
+
+
+
+</LinearLayout>

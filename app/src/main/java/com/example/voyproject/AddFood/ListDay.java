@@ -46,7 +46,7 @@ public class ListDay extends AppCompatActivity {
         btnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ListDay.this, MainActivityFood.class);
+                Intent intent = new Intent(ListDay.this, Group.class);
                 intent.putExtra("textMeal", textMeal);
                 startActivity(intent);
             }

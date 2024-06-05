@@ -33,6 +33,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String FOOD_CARBO = "carbo";
     private static final String FOOD_GRAMM = "gramm";
 
+    private static final String FOOD_GROUP = "groupFood";
+
     private static final String FOOD_DATE = "date";
     private static final String FOOD_CATEGORY= "category";
 
@@ -76,9 +78,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(FOOD_GRAMM, gramm);
         long result = db.insert(TABLE_NAME_FOODLIST, null, cv);
         if(result == -1)
-            Toast.makeText(context, "Failed to add", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Ошибка при добавлении", Toast.LENGTH_LONG).show();
         else
-            Toast.makeText(context, "Successfully added.", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Успешно добавлено", Toast.LENGTH_LONG).show();
     }
 
     public void deleteOneRow(String id)
@@ -86,9 +88,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_NAME_FOODLIST, "_id=?", new String[]{id});
         if(result == -1)
-            Toast.makeText(context, "Failed to delete", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Ошибка при удалении", Toast.LENGTH_LONG).show();
         else
-            Toast.makeText(context, "Successfully deleted.", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Успешно удалено", Toast.LENGTH_LONG).show();
     }
 
     public void deleteOneRowInProfile(String id)
@@ -96,9 +98,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_NAME_CATEGORYLIST, "_id=?", new String[]{id});
         if(result == -1)
-            Toast.makeText(context, "Failed to delete", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Ошибка при удалении", Toast.LENGTH_LONG).show();
         else
-            Toast.makeText(context, "Successfully deleted.", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Успешно удалено", Toast.LENGTH_LONG).show();
     }
 
     public void moveFood(String name, String kcal, String protein, String fat, String carbo, String gramm, String category, String date)
@@ -116,13 +118,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(FOOD_DATE, date);
         long result = db.insert(TABLE_NAME_CATEGORYLIST, null, cv);
         if(result == -1)
-            Toast.makeText(context, "Failed to add", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Ошибка при добавлении", Toast.LENGTH_LONG).show();
         else
-            Toast.makeText(context, "Successfully added.", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Успешно добавлено", Toast.LENGTH_LONG).show();
     }
 
-    public Cursor readAllData(){
-        String query = "SELECT * FROM " + TABLE_NAME_FOODLIST + " ORDER BY name";
+    public Cursor readAllData(String group){
+        String query = "SELECT * FROM " + TABLE_NAME_FOODLIST + " WHERE "+FOOD_GROUP+" LIKE '"+group+"' ORDER BY name";
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -135,7 +137,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor readAllDataCATEGORYLIST(String textMeal, String date){
         String query = "SELECT * FROM " + TABLE_NAME_CATEGORYLIST +
-                " WHERE " + FOOD_CATEGORY + " LIKE " + " '" + textMeal + "' AND date LIKE '"+date+"' ORDER BY name";
+                " WHERE " + FOOD_CATEGORY + " LIKE '" + textMeal + "' AND date LIKE '"+date+"' ORDER BY name";
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -155,43 +157,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else
             cursor = db.query (TABLE_NAME_CATEGORYLIST, new String[] {"SUM("+str+"), category, date"}, "category = '"+category+"' AND date = '"+date+"'", null, null, null, null);
 
-        float sum;
-        if(cursor.moveToFirst())
-            sum = valueOf(cursor.getInt(0));
+        float sum, index;
+        if(cursor.moveToFirst()) {
+            index = cursor.getFloat(0);
+            sum = Float.parseFloat(String.valueOf(index));
+        }
         else sum = 0;
-
 
         db.close();
         return sum;
     }
 
-    public String getNameFood(String category)
+    public String getNameFood(String category, String date)
     {
         String text = "";
-        int countRow;
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String query = "SELECT name FROM " + TABLE_NAME_CATEGORYLIST +
-                    " WHERE " + FOOD_CATEGORY + " LIKE " + " '" + category + "' ";
+        String query = "SELECT group_concat(name, ', ') AS nameFood FROM " + TABLE_NAME_CATEGORYLIST +
+                    " WHERE " + FOOD_CATEGORY + " LIKE '" + category + "' AND date LIKE '"+date+"' ORDER BY name";
 
-        Cursor cursor = db.rawQuery (query, null);
-
-        String querySum = "SELECT COUNT(name) FROM " + TABLE_NAME_CATEGORYLIST +
-                " WHERE " + FOOD_CATEGORY + " LIKE " + " '" + category + "' ";
-
-        Cursor cursor1 = db.rawQuery (querySum, null);
-        if(cursor1.moveToFirst())
-            countRow = valueOf(cursor1.getInt(0));
-        else countRow = 0;
+        Cursor cursor = db.rawQuery(query, null);
 
         if(cursor.moveToFirst())
-        {
-            for(int i = 0; i < countRow; i++)
-            {
-                text += String.valueOf(cursor.getInt(i));
-            }
-        }
+            text = cursor.getString(0);
         else text = "Пусто";
 
         db.close();

@@ -27,7 +27,7 @@ public class MainActivityFood extends AppCompatActivity {
     RecyclerView recyclerView;
     DatabaseHelper databaseHelper;
     ArrayList<String> food_id, food_name, food_kcal, food_protein, food_fat, food_carbo, food_gramm;
-    String textMeal;
+    String textMeal, group;
     ListAdapter listAdapter;
 
     @Override
@@ -36,12 +36,13 @@ public class MainActivityFood extends AppCompatActivity {
         setContentView(R.layout.add_food);
         Bundle arguments = getIntent().getExtras();
         textMeal = arguments.get("textMeal").toString();
+        group = arguments.get("group").toString();
 
         Button btnBack = findViewById(R.id.btnBackToMenu);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(MainActivityFood.this, MainMenu.class), 0);
+                finish();
             }
         });
 
@@ -80,18 +81,18 @@ public class MainActivityFood extends AppCompatActivity {
     }
 
     void storeDataInArrays(){
-        Cursor cursor = databaseHelper.readAllData();
+        Cursor cursor = databaseHelper.readAllData(group);
         if(cursor.getCount() == 0){
-            Toast.makeText(this, "No data.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Нет данных", Toast.LENGTH_LONG).show();
         }
         else{
             while(cursor.moveToNext()){
                 food_id.add(cursor.getString(0));
                 food_name.add(cursor.getString(1));
-                food_kcal.add(cursor.getString(2));
-                food_protein.add(cursor.getString(3));
-                food_fat.add(cursor.getString(4));
-                food_carbo.add(cursor.getString(5));
+                food_protein.add(cursor.getString(2));
+                food_fat.add(cursor.getString(3));
+                food_carbo.add(cursor.getString(4));
+                food_kcal.add(cursor.getString(5));
                 food_gramm.add(cursor.getString(6));
             }
         }
