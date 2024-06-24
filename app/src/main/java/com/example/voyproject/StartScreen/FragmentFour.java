@@ -26,7 +26,7 @@ public class FragmentFour extends Fragment {
     Button btnStart;
     SharedPreferences sPref;
     public static final String APP_PREFERENCES = "myProfile";
-    public static final String APP_PREFERENCES_TYPE = "Type";
+    public static final String APP_PREFERENCES_TYPE = "TypeID";
     public static final String APP_PREFERENCES_WEIGHT = "Weight";
     public static final String APP_PREFERENCES_DESWEIGHT = "DesiredWeight";
 
@@ -50,7 +50,7 @@ public class FragmentFour extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (id == 2131230994)
+                if (id == 1)
                 {
                     if(TextUtils.isEmpty(editWeight.getText().toString()))
                         errorWeight.setError("Введите значение!");

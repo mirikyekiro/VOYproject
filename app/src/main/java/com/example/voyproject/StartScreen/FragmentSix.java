@@ -124,6 +124,8 @@ public class FragmentSix extends Fragment {
                     ed.putBoolean(DATA_SAVE, true);
                 }
 
+
+
                 ed.commit();
                 activity.finish();
 
@@ -135,12 +137,19 @@ public class FragmentSix extends Fragment {
 
     public ToggleButton CheckBtn(ToggleButton mainBtn, ToggleButton[] btn, ToggleButton saveBtn)
     {
-        for(int i= 0; i< btn.length; i++)
+        if(saveBtn != null)
         {
-            btn[i].setChecked(false);
+            saveBtn.setChecked(false);
+            saveBtn = null;
         }
-        mainBtn.setChecked(true);
-        saveBtn = mainBtn;
+        else {
+            for(int i= 0; i< btn.length; i++)
+            {
+                btn[i].setChecked(false);
+            }
+            mainBtn.setChecked(true);
+            saveBtn = mainBtn;
+        }
         return saveBtn;
     }
 
