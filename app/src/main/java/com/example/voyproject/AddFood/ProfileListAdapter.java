@@ -82,7 +82,7 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
                 public void onClick(View v) {
                     db.deleteOneRowInProfile(String.valueOf(food_id.get(position)));
                     food_id.remove(food_id.get(position));
-                    adapter.notifyDataSetChanged();
+
                 }
             });
         }

@@ -14,11 +14,15 @@ import com.example.voyproject.R;
 public class NewFood extends AppCompatActivity {
     EditText nameEdit, kcalEdit, proteinEdit, fatEdit, carboEdit, grammEdit;
     ListAdapter adapter;
+    String group;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_food);
+
+        Bundle arguments = getIntent().getExtras();
+        group = arguments.get("group").toString();
 
         nameEdit = this.findViewById(R.id.editNameFood);
         kcalEdit = this.findViewById(R.id.kcalEdit);
@@ -45,7 +49,8 @@ public class NewFood extends AppCompatActivity {
                         proteinEdit.getText().toString().trim(),
                         fatEdit.getText().toString().trim(),
                         carboEdit.getText().toString().trim(),
-                        grammEdit.getText().toString().trim());
+                        grammEdit.getText().toString().trim(),
+                        group);
                 finish();
             }
         });

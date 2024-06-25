@@ -66,7 +66,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM "+TABLE_NAME_CATEGORYLIST);
     }
 
-    public void addFood(String name, String kcal, String protein, String fat, String carbo, String gramm){
+    public void addFood(String name, String kcal, String protein, String fat, String carbo, String gramm, String groupFood){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -76,6 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(FOOD_FAT, fat);
         cv.put(FOOD_CARBO, carbo);
         cv.put(FOOD_GRAMM, gramm);
+        cv.put(FOOD_GROUP, groupFood);
         long result = db.insert(TABLE_NAME_FOODLIST, null, cv);
         if(result == -1)
             Toast.makeText(context, "Ошибка при добавлении", Toast.LENGTH_LONG).show();

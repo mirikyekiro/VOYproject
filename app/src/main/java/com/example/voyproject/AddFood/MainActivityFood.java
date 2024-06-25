@@ -1,5 +1,6 @@
 package com.example.voyproject.AddFood;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -38,6 +39,8 @@ public class MainActivityFood extends AppCompatActivity {
         textMeal = arguments.get("textMeal").toString();
         group = arguments.get("group").toString();
 
+        Activity activity = this;
+
         Button btnBack = findViewById(R.id.btnBackToMenu);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +63,9 @@ public class MainActivityFood extends AppCompatActivity {
         btnAddNewFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivityFood.this, NewFood.class));
+                Intent intent = new Intent(activity, NewFood.class);
+                intent.putExtra("group", group);
+                startActivity(intent);
             }
         });
 
